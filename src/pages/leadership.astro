@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+
+/**
+ * Generated from the `leaders` collection. Emails are constrained by the
+ * content schema to role addresses on pack662nyc.com, so a personal address
+ * fails the build rather than reaching production.
+ */
+const leaders = (await getCollection('leaders'))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Leadership"
+  description="The adult volunteers who run Cub Scout Pack 662, and how to reach them."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>Leadership</h1>
+      <p class="lede">
+        Pack 662 is run by parent volunteers. Every adult who works with youth has
+        completed Scouting America's Youth Protection training and a background check.
+      </p>
+      <p class="meta">
+        We publish role addresses rather than personal ones. Mail sent to a role
+        reaches whoever holds it now, and keeps working when the role changes hands.
+      </p>
+    </div>
+
+    {
+      leaders.map((leader) => (
+        <section class="card">
+          <h2>{leader.data.role}</h2>
+          <p><strong><Field value={leader.data.name} /></strong></p>
+          {leader.data.bio && <p><Field value={leader.data.bio} /></p>}
+          {leader.data.email && (
+            <p>
+              <a href={`mailto:${leader.data.email}`}>{leader.data.email}</a>
+            </p>
+          )}
+        </section>
+      ))
+    }
+
+    <div class="prose">
+      <h2>Helping out</h2>
+      <p>
+        A pack runs on volunteers, and most of what is needed is small: driving,
+        bringing something, running one activity. If you have an hour, we have
+        something to do with it. Email
+        <a href="mailto:committeechair@pack662nyc.com">committeechair@pack662nyc.com</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

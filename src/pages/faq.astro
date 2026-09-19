@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+
+/**
+ * Generated from the `faqs` collection. Plain headings and paragraphs rather
+ * than <details> accordions: a parent scanning on a phone, or using find in
+ * page, should see every answer without tapping anything.
+ */
+const CATEGORY_ORDER = ['Joining', 'Meetings', 'Cost', 'Uniform', 'Outdoors', 'General'] as const;
+
+const entries = (await getCollection('faqs')).filter((e) => !e.data.draft);
+
+const grouped = CATEGORY_ORDER.map((category) => ({
+  category,
+  items: entries
+    .filter((e) => e.data.category === category)
+    .sort((a, b) => a.data.order - b.data.order),
+})).filter((g) => g.items.length > 0);
+
+const slug = (s: string) => s.replace(/\s+/g, '-').toLowerCase();
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Answers to the questions families ask most often before joining Cub Scout Pack 662."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>Frequently asked questions</h1>
+      <p class="lede">
+        The things families ask before they join. If yours is not here, email
+        <a href="mailto:info@pack662nyc.com">info@pack662nyc.com</a> and we will
+        answer it and then add it.
+      </p>
+    </div>
+
+    <nav aria-label="Jump to a section" class="prose">
+      <ul>
+        {grouped.map((g) => <li><a href={`#${slug(g.category)}`}>{g.category}</a></li>)}
+      </ul>
+    </nav>
+
+    {
+      grouped.map((g) => (
+        <section class="prose" aria-labelledby={slug(g.category)}>
+          <h2 id={slug(g.category)}>{g.category}</h2>
+          {g.items.map((item) => (
+            <div>
+              <h3>{item.data.question}</h3>
+              <p><Field value={item.data.answer} /></p>
+            </div>
+          ))}
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>

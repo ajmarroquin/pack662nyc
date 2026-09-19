@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+import { site } from '../data/site';
+
+/**
+ * A recurring schedule, not an event calendar. Meeting time and location are
+ * already public on BeAScout, so publishing them here adds nothing new; where
+ * the pack is at any given moment is a different thing and never goes online.
+ */
+const m = site.meeting;
+---
+
+<BaseLayout
+  title="Meetings"
+  description="When and where Cub Scout Pack 662 meets in New York City, and what to expect on a first visit."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>Meetings</h1>
+      <p class="lede">
+        Our regular schedule and location. Visitors are welcome; let us know you are
+        coming so someone can meet you at the door.
+      </p>
+    </div>
+
+    <section class="card">
+      <h2>Regular schedule</h2>
+      <dl class="facts">
+        <dt>We meet</dt>
+        <dd><Field value={m.schedule} /></dd>
+
+        <dt>Where</dt>
+        <dd>
+          <Field value={m.locationName} /><br />
+          <Field value={m.streetAddress} /><br />
+          <Field value={m.addressLocality} />, {m.addressRegion} <Field value={m.postalCode} />
+        </dd>
+
+        <dt>Finding the entrance</dt>
+        <dd><Field value={m.arrivalNotes} /></dd>
+
+        <dt>Getting there</dt>
+        <dd><Field value={m.gettingThere} /></dd>
+      </dl>
+    </section>
+
+    <div class="prose">
+      <h2>Den meetings and pack meetings</h2>
+      <p>
+        A den is the small group your child works with week to week, made up of kids
+        in the same grade. The pack is every den together. Dens meet on their own
+        schedule; the whole pack comes together less often. If your child joins, their
+        den leader will tell you that den's schedule directly.
+      </p>
+
+      <h2>Trips, campouts, and one-off events</h2>
+      <p>
+        Those are not listed here, because plans change and a website that says one
+        thing while a text message says another helps nobody. Families hear about them
+        directly: <Field value={m.communication} />
+      </p>
+
+      <h2>Visiting for the first time</h2>
+      <p>
+        Come as you are; no uniform, nothing to bring. Email
+        <a href={`mailto:${site.email.cubmaster}`}>{site.email.cubmaster}</a> beforehand
+        so we know to expect you.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

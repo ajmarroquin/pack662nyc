@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+import { site, isTodo } from '../data/site';
+
+/**
+ * A parent arriving from a search should know in ten seconds whether this is
+ * for them: who we are, when we meet, and one thing to do next.
+ */
+const m = site.meeting;
+const joinHref = isTodo(site.beAScoutUrl) ? '/join' : site.beAScoutUrl;
+---
+
+<BaseLayout
+  title="Cub Scout Pack 662 | New York City"
+  description={site.tagline}
+  bareTitle
+>
+  <section class="hero">
+    <div class="wrap prose">
+      <h1>Cub Scout Pack 662</h1>
+      <p class="lede"><Field value={site.tagline} /></p>
+      <p><Field value={site.intro} /></p>
+      <p>
+        <a class="cta" href="/join">Join Pack 662</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="wrap stack">
+    <section class="card">
+      <h2>When and where we meet</h2>
+      <dl class="facts">
+        <dt>Schedule</dt>
+        <dd><Field value={m.schedule} /></dd>
+        <dt>Location</dt>
+        <dd>
+          <Field value={m.locationName} /><br />
+          <Field value={m.streetAddress} /><br />
+          <Field value={m.addressLocality} />, {m.addressRegion} <Field value={m.postalCode} />
+        </dd>
+      </dl>
+      <p><a href="/meetings">Getting there and what to expect &rarr;</a></p>
+    </section>
+
+    <div class="prose">
+      <h2>New to Cub Scouting?</h2>
+      <p>
+        Cub Scouting is Scouting America's program for children in elementary school,
+        done alongside a parent or another adult in their family. Kids work through
+        activities set at their own grade level, in a small group of children the same
+        age.
+      </p>
+      <p>
+        <a href="/about">What Cub Scouting actually is &rarr;</a>
+      </p>
+
+      <h2>Come see for yourself</h2>
+      <p>
+        You are welcome at a meeting before you decide anything. Email
+        <a href={`mailto:${site.email.cubmaster}`}>{site.email.cubmaster}</a> and tell us
+        your child's grade, and we will tell you which meeting to come to.
+      </p>
+      <p>
+        <a class="cta cta-secondary" href={joinHref}>
+          {isTodo(site.beAScoutUrl) ? 'How joining works' : 'Sign up on BeAScout'}
+        </a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>

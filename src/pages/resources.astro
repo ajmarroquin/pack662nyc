@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+import { isTodo } from '../data/site';
+
+/**
+ * The page parents return to. Flat and scannable, no accordions: someone
+ * looking for the health form on a phone should find it without tapping
+ * anything open first.
+ */
+const entries = (await getCollection('links')).filter((e) => !e.data.draft);
+
+// Fixed order, so "Start here" is always first regardless of file names.
+const CATEGORY_ORDER = [
+  'Start here',
+  'Forms and paperwork',
+  'Scouting America',
+  'Gear and uniform',
+  'Camping and outdoors',
+] as const;
+
+const grouped = CATEGORY_ORDER.map((category) => ({
+  category,
+  items: entries
+    .filter((e) => e.data.category === category)
+    .sort((a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title)),
+})).filter((group) => group.items.length > 0);
+---
+
+<BaseLayout
+  title="Resources"
+  description="Links parents of Cub Scout Pack 662 need: sign-in, forms, council information, uniform and camping."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>Resources</h1>
+      <p class="lede">
+        The links parents need most, in one place. Bookmark this page.
+      </p>
+    </div>
+
+    {
+      grouped.map((group) => (
+        <section aria-labelledby={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
+          <h2 id={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
+            {group.category}
+          </h2>
+          <ul class="link-list">
+            {group.items.map((item) => (
+              <li>
+                {isTodo(item.data.url) ? (
+                  <>
+                    <a
+                      href="/contact"
+                      aria-describedby={`d-${item.id}`}
+                    >
+                      {item.data.title}
+                    </a>
+                    <p id={`d-${item.id}`}>
+                      <Field value={item.data.url} />
+                      {item.data.description && <> {item.data.description}</>}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <a
+                      href={item.data.url}
+                      aria-describedby={item.data.description ? `d-${item.id}` : undefined}
+                    >
+                      {item.data.title}
+                    </a>
+                    {item.data.description && <p id={`d-${item.id}`}>{item.data.description}</p>}
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <div class="prose">
+      <p class="meta">
+        A link here that is broken or out of date is worth telling us about.
+        Email <a href="mailto:info@pack662nyc.com">info@pack662nyc.com</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

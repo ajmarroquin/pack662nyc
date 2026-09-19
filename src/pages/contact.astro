@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+import { site } from '../data/site';
+
+/**
+ * A mailto:, deliberately, not a form. A form means a backend to run, spam to
+ * filter, and messages that quietly go nowhere when a volunteer stops checking
+ * an inbox. Mail to a role address lands somewhere a person already looks.
+ *
+ * This site stores nothing and never will. Anything that takes a submission
+ * belongs in the separate member tool, not in this public repository.
+ */
+const m = site.meeting;
+
+const contacts = [
+  {
+    address: site.email.info,
+    who: 'General questions',
+    when: 'Start here if you are not sure who to ask.',
+  },
+  {
+    address: site.email.cubmaster,
+    who: 'Cubmaster',
+    when: 'Visiting a meeting, joining, or anything about the program itself.',
+  },
+  {
+    address: site.email.committeeChair,
+    who: 'Committee Chair',
+    when: 'Volunteering, fees, financial assistance, and pack administration.',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="How to reach Cub Scout Pack 662 in New York City, and where we meet."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>Contact</h1>
+      <p class="lede">
+        Email is the fastest way to reach us. These go to whoever currently holds
+        the role, so they keep working as volunteers change.
+      </p>
+    </div>
+
+    {
+      contacts.map((c) => (
+        <section class="card">
+          <h2>{c.who}</h2>
+          <p><a href={`mailto:${c.address}`}>{c.address}</a></p>
+          <p class="meta">{c.when}</p>
+        </section>
+      ))
+    }
+
+    <section class="card">
+      <h2>Where we meet</h2>
+      <address class="meta" style="font-style: normal;">
+        <Field value={m.locationName} /><br />
+        <Field value={m.streetAddress} /><br />
+        <Field value={m.addressLocality} />, {m.addressRegion} <Field value={m.postalCode} />
+      </address>
+      <p><a href="/meetings">Schedule and how to find the entrance &rarr;</a></p>
+    </section>
+
+    <div class="prose">
+      <p class="meta">
+        We do not have a contact form. Mail goes to a person, not a database; this
+        site collects nothing and stores nothing about you.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
