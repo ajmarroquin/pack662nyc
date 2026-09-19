@@ -49,30 +49,24 @@ const grouped = CATEGORY_ORDER.map((category) => ({
           <ul class="link-list">
             {group.items.map((item) => (
               <li>
-                {isTodo(item.data.url) ? (
-                  <>
-                    <a
-                      href="/contact"
-                      aria-describedby={`d-${item.id}`}
-                    >
-                      {item.data.title}
-                    </a>
-                    <p id={`d-${item.id}`}>
-                      <Field value={item.data.url} />
-                      {item.data.description && <> {item.data.description}</>}
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <a
-                      href={item.data.url}
-                      aria-describedby={item.data.description ? `d-${item.id}` : undefined}
-                    >
-                      {item.data.title}
-                    </a>
-                    {item.data.description && <p id={`d-${item.id}`}>{item.data.description}</p>}
-                  </>
-                )}
+                {/*
+                  An unfilled link points at /contact rather than nowhere: a
+                  parent who taps it still reaches a person.
+                */}
+                <a
+                  href={isTodo(item.data.url) ? '/contact' : item.data.url}
+                  aria-describedby={`d-${item.id}`}
+                >
+                  {item.data.title}
+                </a>
+                <p id={`d-${item.id}`}>
+                  {isTodo(item.data.url) && (
+                    <>
+                      <Field value={item.data.url} />{' '}
+                    </>
+                  )}
+                  <Field value={item.data.description} />
+                </p>
               </li>
             ))}
           </ul>
