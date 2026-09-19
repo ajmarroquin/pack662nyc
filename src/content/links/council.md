@@ -1,7 +1,7 @@
 ---
-title: "Our council"
-url: "TODO: council website URL (see site.ts council.url)"
-description: "TODO: one line on what this link is for and when a parent needs it"
+title: "Greater New York Councils"
+url: "https://nycscouting.org"
+description: "Our council. Runs camps, training and events across the five boroughs."
 category: "Scouting America"
 order: 10
 ---

@@ -36,14 +36,27 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         <Icon name="star" />
         <h2>What it costs</h2>
       </div>
+      <p>
+        Two separate charges, because they go to two different places.
+      </p>
       <dl class="facts">
-        <dt>Per Scout, per year</dt>
-        <dd><Field value={site.cost.amount} /></dd>
-        <dt>What that covers</dt>
-        <dd><Field value={site.cost.covers} /></dd>
+        <dt>Scouting America membership</dt>
+        <dd>
+          <strong>{site.cost.membership}</strong> for one year. This registers your child
+          nationally and renews on the date you joined, not in September.
+        </dd>
+        <dt>Pack dues</dt>
+        <dd>
+          <strong>{site.cost.dues}</strong> a year. These are ours, they run from September,
+          and we invoice you through Scoutbook once your child is registered.
+        </dd>
         <dt>If cost is a barrier</dt>
         <dd><Field value={site.cost.assistance} /></dd>
       </dl>
+      <p class="meta">
+        Uniform and handbook are separate, and campouts and some events carry their own
+        cost. See the <a href="/faq">FAQ</a> for what you can put off buying.
+      </p>
       <p class="meta">
         Uniform and handbook are separate. See <a href="/resources">Resources</a> for
         where to get them, and the <a href="/faq">FAQ</a> for what you can put off
@@ -96,20 +109,41 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       }
 
       <h2>What happens after you register</h2>
+      </div>
       <ol>
-        <li>You get an invitation to Scoutbook, where advancement and calendar live.</li>
-        <li>Your child is placed in the den for their grade, and that den leader is in touch.</li>
         <li>
-          You fill out parts A and B of the Scouting America Annual Health Record.
-          It is on the <a href="/resources">Resources</a> page and is needed before
-          any overnight.
+          <strong>Register with Scouting America.</strong> A one-year membership,
+          {site.cost.membership}, which renews on the date you joined.
+          {
+            !isTodo(site.registrationUrl) && (
+              <> <a href={site.registrationUrl}>Start the registration</a>.</>
+            )
+          }
         </li>
         <li>
-          Any adult who plans to volunteer takes Youth Protection training. It is
-          free, online, and takes under an hour.
+          <strong>Pay pack dues.</strong> {site.cost.dues} a year, running from September.
+          We invoice you through Scoutbook once your child is registered.
+        </li>
+        <li>
+          <strong>Get a uniform.</strong> From the
+          <a href="/resources">Scout Shop</a>, or from our uniform exchange bins at a
+          meeting, which is free and worth checking first.
+        </li>
+        <li>
+          <strong>Fill out the health form.</strong> Parts A and B of the Annual Health
+          and Medical Record, on the <a href="/resources">Resources</a> page. We do not
+          need an insurance card, a doctor's signature or a vaccination record; just
+          what is on the form.
         </li>
       </ol>
+      <p>
+        Your child joins the den for their grade, and that den leader will be in touch
+        with the den's schedule. Any adult who plans to volunteer also takes Scouting
+        America's Youth Protection training, which is free, online, and takes under an
+        hour.
+      </p>
 
+      <div class="prose">
       <p>
         Questions before any of that: <a href={`mailto:${site.email.info}`}>{site.email.info}</a>.
       </p>
