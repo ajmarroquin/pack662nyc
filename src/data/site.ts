@@ -66,6 +66,13 @@ export const site = {
     assistance: 'TODO: how a family asks about financial assistance',
   },
 
+  /**
+   * This site's source. Public on purpose: a parent who wants to fix a typo
+   * should be able to see exactly what the site is and propose the change.
+   * Linked from the footer.
+   */
+  repoUrl: 'https://github.com/ajmarroquin/pack662nyc',
+
   council: {
     name: 'TODO: council name (CONTENT-INTAKE.md, Resources > council)',
     url: 'TODO: council website URL',

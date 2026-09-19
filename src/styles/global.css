@@ -426,3 +426,31 @@ thead th {
 tbody th {
   font-weight: 700;
 }
+
+/* --- Source link -------------------------------------------------------- */
+
+.repo-link {
+  margin-block-start: 1rem;
+  font-size: 0.875rem;
+}
+
+.repo-link a {
+  display: inline-flex;
+  /* Align the mark to the first line, not to the middle of wrapped text. */
+  align-items: flex-start;
+  gap: 0.5rem;
+  /* Keeps the tap target comfortable without stretching the footer. */
+  padding-block: 0.5rem;
+  text-decoration: none;
+}
+
+.repo-link a:hover span,
+.repo-link a:focus-visible span {
+  text-decoration: underline;
+}
+
+.gh-mark {
+  flex: none;
+  /* Nudge onto the cap height of the first line. */
+  margin-block-start: 0.1875rem;
+}

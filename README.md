@@ -148,6 +148,97 @@ Then, in Namecheap:
 
 ---
 
+## Contributing
+
+Anyone in the pack can suggest a change. Most of what needs changing is text,
+and changing text does not require knowing anything about code.
+
+**Before anything else, read [the four rules](#the-four-rules).** Rule 1 is the
+one that matters most: nothing resembling a roster, a contact list, or a
+spreadsheet of families goes in this repository, ever, in any format. This
+repository is public and its history cannot be scrubbed.
+
+### Fixing a typo or updating text, without installing anything
+
+1. Find the page on the site and note what is wrong.
+2. In this repository, open the matching file:
+   - Meeting time, address, cost, council: `src/data/site.ts`
+   - A leader: `src/content/leaders/`
+   - An FAQ answer: `src/content/faqs/`
+   - A resource link: `src/content/links/`
+   - Page wording: `src/pages/`, one file per page
+3. Click the pencil icon to edit it in the browser.
+4. At the bottom, choose **Create a new branch for this commit and start a pull
+   request**, describe what you changed in a sentence, and submit.
+
+CI runs on the pull request. If it goes green, the change is safe to merge. If
+it goes red, open the failed check; the error says which file and what is wrong
+with it, in words rather than a stack trace.
+
+### Adding a leader, an FAQ, or a link
+
+Copy an existing file in the relevant folder, rename it, and edit the fields at
+the top. The fields are fixed and validated:
+
+- A leader's `email` **must** be a role address on `pack662nyc.com`. A personal
+  address fails the build. This is deliberate: role addresses keep working when
+  a volunteer hands the job on, and personal addresses on a public site get
+  scraped.
+- An FAQ `category` must be one of Joining, Meetings, Cost, Uniform, Outdoors,
+  General.
+- A link `category` must be one of Start here, Forms and paperwork, Scouting
+  America, Gear and uniform, Camping and outdoors.
+- `order` controls position within a section. Lower is higher up. Leave gaps of
+  10 so things can be slotted in later without renumbering everything.
+
+A malformed entry fails the build rather than rendering an empty block on the
+live site. That is the point: a broken pull request is a minor annoyance, and a
+blank space on the join page is a family that did not join.
+
+### Working on it locally
+
+```bash
+git clone https://github.com/ajmarroquin/pack662nyc.git
+cd pack662nyc
+npm install
+npm run dev
+```
+
+Before opening a pull request:
+
+```bash
+npm run build           # must pass; CI runs exactly this
+npm run no-data-files   # rule 1 check
+```
+
+### What to put in a pull request
+
+One change per pull request where you can manage it, and a sentence saying what
+changed and why. "Fixed the meeting time, it moved to 6:45 in September" is a
+complete description. Screenshots help for anything visual.
+
+### What not to add
+
+No authentication, no roster data, no member-only content, and nothing that
+stores a submission. This site is static files and a `mailto:` link, and it
+stays that way. Anything needing a login or a database belongs in the separate
+member tool at its own subdomain.
+
+No photographs of youth, and no youth last names, in content or in captions.
+
+No analytics, trackers, or embedded third-party scripts without discussing it
+first. The site currently ships zero client JavaScript, which is why it loads
+instantly on a phone with one bar.
+
+### Who to ask
+
+Open an issue, or email
+[info@pack662nyc.com](mailto:info@pack662nyc.com). If you are not sure whether
+something belongs on the site, ask before writing it; that is faster for
+everyone than writing it and finding out in review.
+
+---
+
 ## Repository settings
 
 Set these in GitHub's web interface; they are not in version control.
@@ -175,7 +266,8 @@ sitting. Recorded here so it is not forgotten:
 - [ ] Branch protection on `main`: require the CI check, require a pull request
 - [ ] `CODEOWNERS`
 - [ ] Issue templates, including one for "content needs updating"
-- [ ] `CONTRIBUTING.md`, covering the four rules above before anything else
+- [ ] Split "Contributing" above into a `CONTRIBUTING.md`, which GitHub surfaces
+      automatically when someone opens a pull request
 - [ ] Dependabot for npm and GitHub Actions
 
 Until then the overhead outruns the benefit on a single-maintainer repository.

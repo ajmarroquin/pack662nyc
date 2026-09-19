@@ -181,8 +181,8 @@ each field is asking for.
 | 64 | `amount` | total annual cost per Scout, as a dollar figure |
 | 65 | `covers` | what that figure covers (CONTENT-INTAKE.md, Join > cost.covers) |
 | 66 | `assistance` | how a family asks about financial assistance |
-| 70 | `name` | council name (CONTENT-INTAKE.md, Resources > council) |
-| 71 | `url` | council website URL |
+| 77 | `name` | council name (CONTENT-INTAKE.md, Resources > council) |
+| 78 | `url` | council website URL |
 
 ---
 
