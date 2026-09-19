@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
-import { site } from '../data/site';
+import { site, isTodo } from '../data/site';
 
 /**
  * A mailto:, deliberately, not a form. A form means a backend to run, spam to
@@ -53,6 +53,29 @@ const contacts = [
           <p class="meta">{c.when}</p>
         </section>
       ))
+    }
+
+    {
+      /*
+        A second route that does not depend on our own mail forwarding. If the
+        pack662nyc.com addresses above are ever misconfigured, this one still
+        reaches the pack, because Scouting America runs it.
+      */
+      !isTodo(site.beAScoutUrl) && (
+        <section class="card">
+          <h2>Or ask through BeAScout</h2>
+          <p>
+            Our unit page on Scouting America's own site has a{' '}
+            <strong>Request More Information</strong> button that sends your question
+            straight to us.
+          </p>
+          <p>
+            <a class="cta cta-secondary" href={site.beAScoutUrl}>
+              Our BeAScout unit page
+            </a>
+          </p>
+        </section>
+      )
     }
 
     <section class="card">

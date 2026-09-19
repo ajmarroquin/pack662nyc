@@ -1,7 +1,7 @@
 ---
 title: "Scout Shop"
-url: "TODO: Scout Shop URL, and the nearest physical store if there is one"
-description: "TODO: one line on what this link is for and when a parent needs it"
+url: "https://www.scoutshop.org/"
+description: "Where to buy the uniform. There is also a local shop at Camp Alpine in Alpine, NJ."
 category: "Gear and uniform"
 order: 10
 ---

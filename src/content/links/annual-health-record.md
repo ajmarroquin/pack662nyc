@@ -1,7 +1,7 @@
 ---
-title: "Annual Health Record (Parts A and B)"
-url: "TODO: URL of the current Scouting America health record PDF"
-description: "TODO: one line on what this link is for and when a parent needs it"
+title: "Annual Health and Medical Record"
+url: "https://drive.google.com/file/d/1Zmn9PwFbwGsGYVg1Fzozoo8rn-VjXtBw/view?usp=sharing"
+description: "Parts A and B. Needed before any overnight. No insurance card, doctor's signature or vaccination record required."
 category: "Forms and paperwork"
 order: 10
 ---
