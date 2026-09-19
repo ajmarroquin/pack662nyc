@@ -86,6 +86,13 @@ const contentIncomplete = true;
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
 
+    {/*
+      Without this the browser requests /favicon.ico on every page load and
+      logs a 404. SVG rather than .ico so it stays sharp at any size and the
+      repository holds no binary.
+    */}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Cub Scout Pack 662 NYC" />
     <meta property="og:title" content={pageTitle} />
