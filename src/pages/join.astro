@@ -37,26 +37,24 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         <h2>What it costs</h2>
       </div>
       <p>
-        Four things, going to three different places. Only the dues are ours.
+        Two charges, going to two different places. Only the dues are ours.
       </p>
       <dl class="facts">
         <dt>Scouting America registration</dt>
         <dd>
-          <strong>{site.cost.registration}</strong> per Scout. Set nationally, not by us,
-          and it renews on the date you joined rather than in September.
-        </dd>
-        <dt>Council fee</dt>
-        <dd>
-          <strong>{site.cost.councilFee}</strong> per Scout, set by Greater New York
-          Councils.
+          <strong>{site.cost.registration}</strong> per Scout, covering national and
+          council. Set for us, not by us, and it renews on the date you joined rather
+          than in September.
         </dd>
         <dt>Pack dues</dt>
         <dd>
-          <strong>{site.cost.dues}</strong> per Scout, running from September. Ours, and
+          <strong>{site.cost.dues}</strong> per Scout, running from September and
           invoiced through Scoutbook once your child is registered. Dues buy adventure
           loops and pins, snacks and supplies, advancement ceremonies, Pinewood and
           Regatta kits, leader training and the annual recharter.
         </dd>
+        <dt>Joining partway through the year</dt>
+        <dd>{site.cost.proration}</dd>
         <dt>Activity fees</dt>
         <dd>
           <strong>{site.cost.activityFees}</strong>, for council campouts and the extra
@@ -67,7 +65,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       </dl>
       <p class="meta">
         Uniform is separate; check the pack&rsquo;s uniform exchange before you buy
-        anything. Adults who register as leaders pay {site.cost.adultRegistration}.
+        anything.
       </p>
       <p class="meta">
         Uniform and handbook are separate. See <a href="/resources">Resources</a> for
@@ -124,8 +122,8 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       </div>
       <ol>
         <li>
-          <strong>Register with Scouting America.</strong> {site.cost.registration} plus
-          the {site.cost.councilFee} council fee, renewing on the date you joined.
+          <strong>Register with Scouting America.</strong> {site.cost.registration},
+          covering national and council, renewing on the date you joined.
           {
             !isTodo(site.registrationUrl) && (
               <> <a href={site.registrationUrl}>Start the registration</a>.</>

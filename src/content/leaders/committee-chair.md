@@ -1,7 +1,5 @@
 ---
 role: "Committee Chair"
 name: "Jigar Mehta"
-email: "committeechair@pack662nyc.com"
-bio: "TODO: two sentences. What they do in the pack and one human detail. No youth names."
 order: 30
 ---

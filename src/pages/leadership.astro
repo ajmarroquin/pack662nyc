@@ -4,9 +4,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
 
 /**
- * Generated from the `leaders` collection. Emails are constrained by the
- * content schema to role addresses on pack662nyc.com, so a personal address
- * fails the build rather than reaching production.
+ * Generated from the `leaders` collection.
+ *
+ * Leader entries carry no email at all, by the pack's choice: naming a person
+ * beside an address implies that mail reaches them personally, and volunteers
+ * change. The role addresses live on /contact instead. The schema still
+ * constrains `email` to pack662nyc.com if one is ever added, so a personal
+ * address fails the build rather than reaching production.
  */
 const leaders = (await getCollection('leaders'))
   .filter((e) => !e.data.draft)
@@ -25,12 +29,13 @@ const leaders = (await getCollection('leaders'))
         completed Scouting America's Youth Protection training and a background check.
       </p>
       <p class="meta">
-        We publish role addresses rather than personal ones. Mail sent to a role
-        reaches whoever holds it now, and keeps working when the role changes hands.
+        We do not publish anyone&rsquo;s mailbox here. Reach any of them through the
+        role addresses on the <a href="/contact">contact page</a>, which keep working
+        when a role changes hands.
       </p>
       <p class="meta">
-        Den leaders are not listed here. If your child joins, their den leader is in
-        touch directly.
+        Den leaders are not listed. If your child joins, their den leader is in touch
+        directly.
       </p>
     </div>
 

@@ -33,6 +33,8 @@ export const site = {
   meeting: {
     schedule: 'Every Thursday, 6:00 to 7:00 p.m., September through June.',
     locationName: 'Brick Presbyterian Church, Watson Hall',
+    // Confirmed by the pack against the Brick Church School map pin. The Akela
+    // Handbook says 66; the handbook is the one that is wrong.
     streetAddress: '62 East 92nd Street',
     addressLocality: 'New York',
     addressRegion: 'NY',
@@ -40,8 +42,6 @@ export const site = {
     /** Entrance, buzzer, which door. Parents ask this first. */
     arrivalNotes:
       'Use the East 92nd Street entrance, between Park and Madison. Reception will greet you and point you downstairs to Watson Hall. If it is your first visit, say so at the door and someone will walk you in.',
-    /** Subway lines, bus, parking. */
-    gettingThere: 'TODO: nearest subway lines and stops, and anything worth knowing about parking',
     /** Where the pack goes when the weather is good. */
     outdoors:
       'When the weather allows we meet outdoors, usually at the East Pinetum in Central Park, sometimes at the East Meadow.',
@@ -86,21 +86,19 @@ export const site = {
    * of joining, and pack dues are the pack's own and run from September.
    */
   /**
-   * Four separate costs going to three different places, shown separately
-   * because only the dues are ours and they renew on a different clock from
-   * the national registration.
+   * Two charges going to two places, plus per-event costs.
    *
-   * NOTE: national plus council comes to $110 here, while the pack's BeAScout
-   * listing advertises $145 to join. Reconcile before launch. The handbook's
-   * figures are used because they itemise; BeAScout's may fold in something
-   * this breakdown does not name.
+   * The Akela Handbook itemises registration as $85 national plus $25 council.
+   * The pack confirms $145 is the current combined figure and that the
+   * handbook needs updating, so BeAScout's number is the one used here.
    */
   cost: {
-    registration: '$85 a year',
-    councilFee: '$25 a year',
+    registration: '$145 a year',
     dues: '$120 a year',
-    adultRegistration: '$65 a year',
     activityFees: '$5 to $75 per event',
+    /** Dues are prorated for families joining after September. */
+    proration:
+      'Pack dues are prorated for anyone joining mid-year: you pay for the share of the year that is left, so joining in the middle means half.',
     assistance:
       'Cost should never be the reason a child cannot join. Ask a Cubmaster and it is handled quietly. Families who can pay more than the dues are welcome to, and the difference sponsors another Scout.',
   },
