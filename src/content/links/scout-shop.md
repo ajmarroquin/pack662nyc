@@ -1,7 +1,7 @@
 ---
-title: "Scout Shop, Cub Scout collection"
-url: "https://www.scoutshop.org/cub-scout-collection"
-description: "Where to buy the uniform. Check our uniform exchange bins first, at a pack meeting."
+title: "Scout Shop"
+url: "https://www.scoutshop.org/"
+description: "Where to buy the uniform. There is also a local shop at Camp Alpine in Alpine, NJ."
 category: "Gear and uniform"
 order: 10
 ---

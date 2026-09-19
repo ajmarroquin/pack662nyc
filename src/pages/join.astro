@@ -37,25 +37,37 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         <h2>What it costs</h2>
       </div>
       <p>
-        Two separate charges, because they go to two different places.
+        Four things, going to three different places. Only the dues are ours.
       </p>
       <dl class="facts">
-        <dt>Scouting America membership</dt>
+        <dt>Scouting America registration</dt>
         <dd>
-          <strong>{site.cost.membership}</strong> for one year. This registers your child
-          nationally and renews on the date you joined, not in September.
+          <strong>{site.cost.registration}</strong> per Scout. Set nationally, not by us,
+          and it renews on the date you joined rather than in September.
+        </dd>
+        <dt>Council fee</dt>
+        <dd>
+          <strong>{site.cost.councilFee}</strong> per Scout, set by Greater New York
+          Councils.
         </dd>
         <dt>Pack dues</dt>
         <dd>
-          <strong>{site.cost.dues}</strong> a year. These are ours, they run from September,
-          and we invoice you through Scoutbook once your child is registered.
+          <strong>{site.cost.dues}</strong> per Scout, running from September. Ours, and
+          invoiced through Scoutbook once your child is registered. Dues buy adventure
+          loops and pins, snacks and supplies, advancement ceremonies, Pinewood and
+          Regatta kits, leader training and the annual recharter.
+        </dd>
+        <dt>Activity fees</dt>
+        <dd>
+          <strong>{site.cost.activityFees}</strong>, for council campouts and the extra
+          Webelos and Arrow of Light trips. Most of these are optional.
         </dd>
         <dt>If cost is a barrier</dt>
-        <dd><Field value={site.cost.assistance} /></dd>
+        <dd>{site.cost.assistance}</dd>
       </dl>
       <p class="meta">
-        Uniform and handbook are separate, and campouts and some events carry their own
-        cost. See the <a href="/faq">FAQ</a> for what you can put off buying.
+        Uniform is separate; check the pack&rsquo;s uniform exchange before you buy
+        anything. Adults who register as leaders pay {site.cost.adultRegistration}.
       </p>
       <p class="meta">
         Uniform and handbook are separate. See <a href="/resources">Resources</a> for
@@ -112,8 +124,8 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       </div>
       <ol>
         <li>
-          <strong>Register with Scouting America.</strong> A one-year membership,
-          {site.cost.membership}, which renews on the date you joined.
+          <strong>Register with Scouting America.</strong> {site.cost.registration} plus
+          the {site.cost.councilFee} council fee, renewing on the date you joined.
           {
             !isTodo(site.registrationUrl) && (
               <> <a href={site.registrationUrl}>Start the registration</a>.</>
@@ -121,7 +133,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
           }
         </li>
         <li>
-          <strong>Pay pack dues.</strong> {site.cost.dues} a year, running from September.
+          <strong>Pay pack dues.</strong> {site.cost.dues}, running from September.
           We invoice you through Scoutbook once your child is registered.
         </li>
         <li>

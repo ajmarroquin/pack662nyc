@@ -28,7 +28,7 @@ export const site = {
 
   /** Two sentences. The first thing a parent reads. */
   intro:
-    'We are a family pack of about seventy Scouts, boys and girls, split into dens by grade. Parents stay with their Scout rather than dropping off, which is the part most families end up liking most.',
+    'We are a family pack of about seventy Scouts, boys and girls, split into dens by grade. A parent or guardian comes along rather than dropping off, and that turns out to be the part most families like best.',
 
   meeting: {
     schedule: 'Every Thursday, 6:00 to 7:00 p.m., September through June.',
@@ -39,12 +39,15 @@ export const site = {
     postalCode: '10128',
     /** Entrance, buzzer, which door. Parents ask this first. */
     arrivalNotes:
-      'Use the school entrance at 62 East 92nd Street, between Park and Madison, and come to Watson Hall. If it is your first time, say so at the door and someone will walk you in.',
+      'Use the East 92nd Street entrance, between Park and Madison. Reception will greet you and point you downstairs to Watson Hall. If it is your first visit, say so at the door and someone will walk you in.',
     /** Subway lines, bus, parking. */
     gettingThere: 'TODO: nearest subway lines and stops, and anything worth knowing about parking',
+    /** Where the pack goes when the weather is good. */
+    outdoors:
+      'When the weather allows we meet outdoors, usually at the East Pinetum in Central Park, sometimes at the East Meadow.',
     /** How the pack actually reaches families about trips and one-off events. */
     communication:
-      'Weekly updates from your den leader, a monthly update from the Cubmaster, and the pack calendar in Scoutbook.',
+      'A pack WhatsApp group and one for your den, a weekly email from your den leader, a monthly email from pack leadership, and the calendar in Scoutbook. There is also an open committee meeting every month.',
   },
 
   /**
@@ -62,35 +65,44 @@ export const site = {
     committeeChair: 'committeechair@pack662nyc.com',
   },
 
-  /** The pack's own unit page on BeAScout. */
-  beAScoutUrl:
-    'https://beascout.scouting.org/search?zip=%2210128%22&radius=10&selectedUnitId=659bd3c6-4f85-4100-a932-d24527070149',
+  /**
+   * The pack's unit page on BeAScout. This is the "I have questions" door:
+   * it carries a Request More Information button that reaches the pack
+   * without publishing anybody's mailbox.
+   */
+  beAScoutUrl: 'https://beascout.scouting.org/units/659bd3c6-4f85-4100-a932-d24527070149',
 
   /**
-   * Scouting America's registration form for this unit.
-   *
-   * Two different URLs are in circulation for this: this one, from the pack's
-   * Linktree, which shares a unit id with the BeAScout listing, and an older
-   * `VES/OnlineReg` link from the pack's welcome email. Confirm which is
-   * canonical before launch; a dead registration link is the worst one to get
-   * wrong.
+   * The registration door. Confirmed by the pack as the link to send someone
+   * who has decided to join, which settles an earlier ambiguity between two
+   * my.scouting.org URLs that were both in circulation.
    */
   registrationUrl:
-    'https://my.scouting.org/online-registration/659bd3c6-4f85-4100-a932-d24527070149/applicant-type',
+    'https://beascout.scouting.org/registration?unitId=659bd3c6-4f85-4100-a932-d24527070149',
 
   /**
    * Two separate charges, deliberately shown separately: the Scouting America
    * membership goes to the national organisation and renews on the anniversary
    * of joining, and pack dues are the pack's own and run from September.
    */
+  /**
+   * Four separate costs going to three different places, shown separately
+   * because only the dues are ours and they renew on a different clock from
+   * the national registration.
+   *
+   * NOTE: national plus council comes to $110 here, while the pack's BeAScout
+   * listing advertises $145 to join. Reconcile before launch. The handbook's
+   * figures are used because they itemise; BeAScout's may fold in something
+   * this breakdown does not name.
+   */
   cost: {
-    membership: '$145',
-    dues: '$120',
-    amount: '$145 to join Scouting America, plus $120 a year in pack dues.',
-    covers:
-      'The $145 registers your child with Scouting America for a year and renews on the date you joined. The $120 is the pack’s own dues, which run from September and cover awards, badges and pack program costs. Uniform and handbook are separate.',
+    registration: '$85 a year',
+    councilFee: '$25 a year',
+    dues: '$120 a year',
+    adultRegistration: '$65 a year',
+    activityFees: '$5 to $75 per event',
     assistance:
-      'TODO: how a family asks about financial assistance, and who they ask (CONTENT-INTAKE.md, Join > cost.assistance)',
+      'Cost should never be the reason a child cannot join. Ask a Cubmaster and it is handled quietly. Families who can pay more than the dues are welcome to, and the difference sponsors another Scout.',
   },
 
   council: {

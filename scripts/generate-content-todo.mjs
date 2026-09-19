@@ -15,7 +15,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const OUT = 'CONTENT-TODO.md';
 
@@ -42,6 +42,9 @@ function tracked() {
     .filter(Boolean)
     .filter((f) => /\.(md|ts|astro)$/.test(f))
     .filter((f) => !SKIP.has(f))
+    // git still lists a deleted file until the deletion is staged, so renaming
+    // a content file would otherwise crash this. Report on what is on disk.
+    .filter((f) => existsSync(f))
     .sort();
 }
 
