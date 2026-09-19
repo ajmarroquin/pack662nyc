@@ -45,15 +45,26 @@ function tracked() {
     .sort();
 }
 
+/** A `key:` line with the value wrapped onto the next one. */
+const KEY_ONLY = /^\s*([A-Za-z_][\w.]*)\s*:\s*$/;
+
 const found = [];
-let lastFieldName = null;
 
 for (const file of tracked()) {
   const lines = readFileSync(file, 'utf8').split('\n');
+  // Reset per file, and track the key a wrapped value belongs to, so a value
+  // on its own line is not attributed to whatever field came before it.
+  let lastFieldName = null;
   lines.forEach((line, i) => {
     // Skip comment lines: they discuss placeholders, they are not placeholders.
     const t = line.trim();
     if (t.startsWith('*') || t.startsWith('//') || t.startsWith('/*') || t.startsWith('#')) return;
+
+    const k = KEY_ONLY.exec(line);
+    if (k) {
+      lastFieldName = k[1];
+      return;
+    }
 
     const m = FIELD.exec(line);
     if (m) {

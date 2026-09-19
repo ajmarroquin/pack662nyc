@@ -72,7 +72,7 @@ each field is asking for.
 | Line | Field | Needs |
 |---|---|---|
 | 44 | `gettingThere` | nearest subway lines and stops, and anything worth knowing about parking |
-| 93 | `gettingThere` | how a family asks about financial assistance, and who they ask (CONTENT-INTAKE.md, Join > cost.assistance) |
+| 93 | `assistance` | how a family asks about financial assistance, and who they ask (CONTENT-INTAKE.md, Join > cost.assistance) |
 
 ---
 
