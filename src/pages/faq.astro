@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
+import Icon from '../components/Icon.astro';
 
 /**
  * Generated from the `faqs` collection. Plain headings and paragraphs rather
@@ -9,6 +10,15 @@ import Field from '../components/Field.astro';
  * page, should see every answer without tapping anything.
  */
 const CATEGORY_ORDER = ['Joining', 'Meetings', 'Cost', 'Uniform', 'Outdoors', 'General'] as const;
+
+const CATEGORY_ICON = {
+  Joining: 'people',
+  Meetings: 'calendar',
+  Cost: 'star',
+  Uniform: 'pack',
+  Outdoors: 'tent',
+  General: 'question',
+} as const;
 
 const entries = (await getCollection('faqs')).filter((e) => !e.data.draft);
 
@@ -45,7 +55,10 @@ const slug = (s: string) => s.replace(/\s+/g, '-').toLowerCase();
     {
       grouped.map((g) => (
         <section class="prose" aria-labelledby={slug(g.category)}>
-          <h2 id={slug(g.category)}>{g.category}</h2>
+          <div class="icon-head">
+            <Icon name={CATEGORY_ICON[g.category]} />
+            <h2 id={slug(g.category)}>{g.category}</h2>
+          </div>
           {g.items.map((item) => (
             <div>
               <h3>{item.data.question}</h3>

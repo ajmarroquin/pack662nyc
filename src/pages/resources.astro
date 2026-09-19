@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
+import Icon from '../components/Icon.astro';
 import { isTodo } from '../data/site';
 
 /**
@@ -19,6 +20,15 @@ const CATEGORY_ORDER = [
   'Gear and uniform',
   'Camping and outdoors',
 ] as const;
+
+/** A mark per section, so the page is scannable by shape as well as by text. */
+const CATEGORY_ICON = {
+  'Start here': 'star',
+  'Forms and paperwork': 'book',
+  'Scouting America': 'compass',
+  'Gear and uniform': 'pack',
+  'Camping and outdoors': 'tent',
+} as const;
 
 const grouped = CATEGORY_ORDER.map((category) => ({
   category,
@@ -43,9 +53,12 @@ const grouped = CATEGORY_ORDER.map((category) => ({
     {
       grouped.map((group) => (
         <section aria-labelledby={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
-          <h2 id={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
-            {group.category}
-          </h2>
+          <div class="icon-head">
+            <Icon name={CATEGORY_ICON[group.category]} />
+            <h2 id={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
+              {group.category}
+            </h2>
+          </div>
           <ul class="link-list">
             {group.items.map((item) => (
               <li>

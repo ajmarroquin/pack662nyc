@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 
 /**
@@ -25,7 +26,10 @@ const m = site.meeting;
     </div>
 
     <section class="card">
-      <h2>Regular schedule</h2>
+      <div class="icon-head">
+        <Icon name="calendar" />
+        <h2>Regular schedule</h2>
+      </div>
       <dl class="facts">
         <dt>We meet</dt>
         <dd><Field value={m.schedule} /></dd>
@@ -46,7 +50,10 @@ const m = site.meeting;
     </section>
 
     <div class="prose">
-      <h2>Den meetings and pack meetings</h2>
+      <div class="icon-head">
+        <Icon name="people" />
+        <h2>Den meetings and pack meetings</h2>
+      </div>
       <p>
         A den is the small group your child works with week to week, made up of kids
         in the same grade. The pack is every den together. Dens meet on their own
@@ -54,7 +61,10 @@ const m = site.meeting;
         den leader will tell you that den's schedule directly.
       </p>
 
-      <h2>Trips, campouts, and one-off events</h2>
+      <div class="icon-head">
+        <Icon name="tent" />
+        <h2>Trips, campouts, and one-off events</h2>
+      </div>
       <p>
         Those are not listed here, because plans change and a website that says one
         thing while a text message says another helps nobody. Families hear about them

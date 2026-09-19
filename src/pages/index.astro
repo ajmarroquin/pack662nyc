@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
+import HeroScene from '../components/HeroScene.astro';
+import Icon from '../components/Icon.astro';
 import { site, isTodo } from '../data/site';
 
 /**
@@ -17,19 +19,26 @@ const joinHref = isTodo(site.beAScoutUrl) ? '/join' : site.beAScoutUrl;
   bareTitle
 >
   <section class="hero">
-    <div class="wrap prose">
+    <div class="wrap">
+      <div class="prose">
+      <p class="eyebrow">New York City</p>
       <h1>Cub Scout Pack 662</h1>
       <p class="lede"><Field value={site.tagline} /></p>
       <p><Field value={site.intro} /></p>
       <p>
         <a class="cta" href="/join">Join Pack 662</a>
       </p>
+      </div>
     </div>
+    <HeroScene />
   </section>
 
   <div class="wrap stack">
     <section class="card">
-      <h2>When and where we meet</h2>
+      <div class="icon-head">
+        <Icon name="calendar" />
+        <h2>When and where we meet</h2>
+      </div>
       <dl class="facts">
         <dt>Schedule</dt>
         <dd><Field value={m.schedule} /></dd>
@@ -44,7 +53,10 @@ const joinHref = isTodo(site.beAScoutUrl) ? '/join' : site.beAScoutUrl;
     </section>
 
     <div class="prose">
-      <h2>New to Cub Scouting?</h2>
+      <div class="icon-head">
+        <Icon name="compass" />
+        <h2>New to Cub Scouting?</h2>
+      </div>
       <p>
         Cub Scouting is Scouting America's program for children in elementary school,
         done alongside a parent or another adult in their family. Kids work through
@@ -55,7 +67,10 @@ const joinHref = isTodo(site.beAScoutUrl) ? '/join' : site.beAScoutUrl;
         <a href="/about">What Cub Scouting actually is &rarr;</a>
       </p>
 
-      <h2>Come see for yourself</h2>
+      <div class="icon-head">
+        <Icon name="people" />
+        <h2>Come see for yourself</h2>
+      </div>
       <p>
         You are welcome at a meeting before you decide anything. Email{' '}
         <a href={`mailto:${site.email.cubmaster}`}>{site.email.cubmaster}</a> and tell us

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
+import Icon from '../components/Icon.astro';
 import { site, isTodo } from '../data/site';
 
 /**
@@ -22,13 +23,19 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         Visit first, decide after. Nobody signs anything at a first meeting.
       </p>
 
-      <h2>Who can join</h2>
+      <div class="icon-head">
+        <Icon name="people" />
+        <h2>Who can join</h2>
+      </div>
       <p>
         Any child in kindergarten through fifth grade, and their family. You do not
         need any Scouting background, camping experience, or gear.
       </p>
 
-      <h2>What it costs</h2>
+      <div class="icon-head">
+        <Icon name="star" />
+        <h2>What it costs</h2>
+      </div>
       <dl class="facts">
         <dt>Per Scout, per year</dt>
         <dd><Field value={site.cost.amount} /></dd>
@@ -43,7 +50,10 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         buying.
       </p>
 
-      <h2>What the year looks like</h2>
+      <div class="icon-head">
+        <Icon name="calendar" />
+        <h2>What the year looks like</h2>
+      </div>
       <p>
         The Scouting year follows the school year. Dens meet through the fall and
         spring, the whole pack comes together less often, and there are outings and
@@ -51,7 +61,10 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         <a href="/meetings">meetings page</a>.
       </p>
 
-      <h2>Visit before you commit</h2>
+      <div class="icon-head">
+        <Icon name="tent" />
+        <h2>Visit before you commit</h2>
+      </div>
       <p>
         Come to a meeting and see whether your child likes it. Email{' '}
         <a href={`mailto:${site.email.cubmaster}`}>{site.email.cubmaster}</a> with your
