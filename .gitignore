@@ -1,0 +1,40 @@
+# ---------------------------------------------------------------------------
+# RULE 1: no roster data in this repository, in any format, ever.
+# A public repo's commit history survives deleting the file. There is no undo.
+# CI (.github/workflows/ci.yml) fails the build if any of these slip through.
+# ---------------------------------------------------------------------------
+*.csv
+*.CSV
+*.xlsx
+*.XLSX
+*.xls
+*.xlsm
+*.tsv
+*.numbers
+*.ods
+roster*
+Roster*
+ROSTER*
+*roster*
+.env
+.env.*
+!.env.example
+
+# Youth imagery never belongs in this repo. See CONTENT.md.
+# (No blanket image ignore, so this is a review rule, not a tooling one.)
+
+# Build output
+dist/
+.astro/
+node_modules/
+.vercel/
+.output/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+npm-debug.log*
+yarn-error.log*

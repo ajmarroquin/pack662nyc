@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+/**
+ * Written for a parent with no prior exposure to Scouting. Everything here is
+ * general to Scouting America's Cub Scout program, not specific to Pack 662,
+ * so it is safe to state plainly. Anything true only of this pack lives on
+ * /meetings or /join behind a placeholder.
+ */
+
+const ranks = [
+  { rank: 'Lion', grade: 'Kindergarten' },
+  { rank: 'Tiger', grade: 'First grade' },
+  { rank: 'Wolf', grade: 'Second grade' },
+  { rank: 'Bear', grade: 'Third grade' },
+  { rank: 'Webelos', grade: 'Fourth grade' },
+  { rank: 'Arrow of Light', grade: 'Fifth grade' },
+];
+---
+
+<BaseLayout
+  title="About Cub Scouting"
+  description="What Cub Scouting is, how a pack and a den differ, what a meeting looks like, and which rank goes with which grade."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>About Cub Scouting</h1>
+      <p class="lede">
+        If nobody in your family has done this before, here is the whole thing in a
+        few minutes.
+      </p>
+
+      <h2>What it is</h2>
+      <p>
+        Cub Scouting is Scouting America's program for children in kindergarten
+        through fifth grade. Kids learn practical things by doing them: cooking,
+        building, first aid, getting around outdoors, taking care of the place they
+        live. It is deliberately hands on, and it is designed to be done with a
+        parent or another adult from the child's family rather than dropped off.
+      </p>
+      <p>
+        Cub Scouting is open to boys and girls. Children who finish the program move
+        on to Scouts BSA, the program for middle and high school age.
+      </p>
+
+      <h2>A den and a pack are not the same thing</h2>
+      <p>
+        A <strong>den</strong> is the small group your child works in week to week,
+        usually six to eight kids in the same grade with one or two adult leaders.
+        This is where most of the actual activity happens.
+      </p>
+      <p>
+        A <strong>pack</strong> is all the dens together. Pack meetings bring
+        everyone into one room to recognize what kids have earned, do something as a
+        whole group, and sort out what is coming next. Siblings and grandparents
+        are welcome at pack meetings.
+      </p>
+
+      <h2>What a meeting is like</h2>
+      <p>
+        A den meeting runs about an hour. It opens with the Scout Oath and Law, moves
+        into an activity tied to whatever the den is working on, and ends with word
+        about what to bring next time. Kids are moving for most of it. Nobody sits
+        and listens for an hour, because that is not how seven-year-olds work.
+      </p>
+      <p>
+        Pack meetings are larger, louder, and shorter on instruction. Expect awards,
+        a skit or a game, and announcements.
+      </p>
+
+      <h2>Ranks by grade</h2>
+      <p>
+        A Scout works on one rank per school year, matched to the grade they are in.
+        There is no catching up to do if you start late.
+      </p>
+      <table>
+        <caption class="meta">Cub Scout ranks and the grade each one goes with</caption>
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            ranks.map((r) => (
+              <tr>
+                <th scope="row">{r.rank}</th>
+                <td>{r.grade}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+
+      <h2>What is expected of parents</h2>
+      <p>
+        At minimum, coming along. Lion and Tiger age Scouts are required to have an
+        adult partner with them at everything. Older dens are less strict about it,
+        but a pack runs entirely on volunteer parents, and packs where no parent
+        steps up do not last.
+      </p>
+      <p>
+        Any adult who works with youth takes Scouting America's Youth Protection
+        training, and no adult is ever alone with a child who is not their own.
+      </p>
+
+      <h2>What it costs</h2>
+      <p>
+        There is a national membership fee set by Scouting America, a council fee,
+        and whatever the pack charges for its own program. Uniforms and books are
+        separate. Our numbers are on the <a href="/join">join page</a>.
+      </p>
+
+      <p>
+        Still have a question? The <a href="/faq">FAQ</a> covers the ones we hear most,
+        or email <a href={`mailto:${site.email.info}`}>{site.email.info}</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import { isTodo } from '../data/site';
+import Todo from './Todo.astro';
+
+/**
+ * Prints a content value, or a loud placeholder if it is still a `TODO:`.
+ *
+ * Pages use this rather than branching on every field, so adding real content
+ * later is a one-line edit in src/data/site.ts with no template change.
+ */
+interface Props {
+  value: string | undefined | null;
+  /** Wraps output in a <p> when true. */
+  block?: boolean;
+}
+
+const { value, block = false } = Astro.props;
+const text = value ?? '';
+const pending = isTodo(text);
+---
+
+{
+  pending ? (
+    <Todo value={text} block={block} />
+  ) : block ? (
+    <p>{text}</p>
+  ) : (
+    <Fragment>{text}</Fragment>
+  )
+}

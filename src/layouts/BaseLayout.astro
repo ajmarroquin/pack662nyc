@@ -1,0 +1,222 @@
+---
+import '../styles/global.css';
+import { site, isTodo } from '../data/site';
+
+/**
+ * The only layout. Every page gets its own title and description; both are
+ * required props rather than optional, because a page shipped with a default
+ * meta description is a page that never gets one.
+ */
+interface Props {
+  title: string;
+  description: string;
+  /** Home sets this so the <title> is not "Pack 662 | Pack 662". */
+  bareTitle?: boolean;
+}
+
+const { title, description, bareTitle = false } = Astro.props;
+
+const pageTitle = bareTitle ? title : `${title} | Cub Scout Pack 662 NYC`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const here = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About Cub Scouting' },
+  { href: '/join', label: 'Join' },
+  { href: '/meetings', label: 'Meetings' },
+  { href: '/leadership', label: 'Leadership' },
+  { href: '/resources', label: 'Resources' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const m = site.meeting;
+
+/**
+ * Organization markup with a postal address. "cub scouts near me" is the real
+ * acquisition channel for a pack, and local structured data is the cheapest
+ * lever on it. Address fields that are still placeholders are dropped rather
+ * than emitted, so search engines never ingest the string "TODO:".
+ */
+const address = Object.fromEntries(
+  Object.entries({
+    '@type': 'PostalAddress',
+    streetAddress: m.streetAddress,
+    addressLocality: m.addressLocality,
+    addressRegion: m.addressRegion,
+    postalCode: m.postalCode,
+    addressCountry: 'US',
+  }).filter(([, v]) => typeof v === 'string' && !isTodo(v)),
+);
+
+const jsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Cub Scout Pack 662',
+  alternateName: 'Pack 662 NYC',
+  url: site.url,
+  email: site.email.info,
+  areaServed: 'New York, NY',
+};
+
+// Only include the address once it has at least a street and a locality.
+if (address.streetAddress && address.addressLocality) {
+  jsonLd.address = address;
+}
+if (!isTodo(site.tagline)) {
+  jsonLd.description = site.tagline;
+}
+
+const metaDescription = isTodo(description)
+  ? 'Cub Scout Pack 662 in New York City. Site in progress.'
+  : description;
+
+// Placeholders are still present sitewide; the banner is removed in the same
+// change that points DNS at this site.
+const contentIncomplete = true;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonical} />
+
+    {/*
+      Without this the browser requests /favicon.ico on every page load and
+      logs a 404. SVG rather than .ico so it stays sharp at any size and the
+      repository holds no binary.
+    */}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Cub Scout Pack 662 NYC" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+
+    <!--
+      No site is live at this address yet and the content is placeholder.
+      Indexing a page full of TODO strings would be worse than not existing.
+      REMOVE THIS TAG in the same change that points DNS at the site.
+    -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">
+          Cub Scout Pack 662
+          <span>New York City</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            {
+              nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={
+                      (item.href === '/' ? here === '/' : here.startsWith(item.href))
+                        ? 'page'
+                        : undefined
+                    }
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    {
+      contentIncomplete && (
+        <div class="todo-banner">
+          <div class="wrap">
+            This site is under construction. Anything marked <code>TODO:</code> has not
+            been written yet.
+          </div>
+        </div>
+      )
+    }
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <h2>Get in touch</h2>
+            <ul>
+              <li><a href={`mailto:${site.email.info}`}>{site.email.info}</a></li>
+              <li><a href={`mailto:${site.email.cubmaster}`}>{site.email.cubmaster}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Start here</h2>
+            <ul>
+              <li><a href="/join">Join the pack</a></li>
+              <li><a href="/meetings">When and where we meet</a></li>
+              <li><a href="/resources">Parent resources</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Learn more</h2>
+            <ul>
+              <li><a href="/about">About Cub Scouting</a></li>
+              <li><a href="/faq">Frequently asked questions</a></li>
+              <li><a href="/leadership">Our leaders</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="fine-print">
+          Cub Scout Pack 662, New York, NY. Scouting America and its marks belong to
+          Scouting America; this is a unit site and not an official Scouting America
+          publication.
+        </p>
+
+        <p class="repo-link">
+          {/*
+            Inline SVG rather than an icon font or a hosted image: no extra
+            request, no client JavaScript, and it inherits the text colour.
+            aria-hidden on the mark because the visible text is the real label.
+          */}
+          <a href={site.repoUrl} rel="noopener">
+            <svg
+              class="gh-mark"
+              viewBox="0 0 16 16"
+              width="18"
+              height="18"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span>This site is open source. Suggest a change on GitHub.</span>
+          </a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

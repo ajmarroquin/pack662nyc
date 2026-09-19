@@ -1,0 +1,614 @@
+/*
+  Plain CSS, mobile first, no framework.
+
+  The whole site is a few kilobytes of CSS and zero JavaScript. That is not
+  minimalism for its own sake: it means a parent on a phone on a subway
+  platform gets the meeting address before the train comes.
+
+  The palette is warm on purpose. Cub Scouting's blue and gold on white reads
+  institutional, and the audience here is a parent deciding whether their
+  seven-year-old would be happy on a Tuesday night, not a procurement officer.
+  Cream ground, rounded corners, and one hand-drawn scene do most of that work.
+*/
+
+/*
+  Self-hosted, one latin subset, variable weight. No third-party request, so
+  no font-provider connection on first paint and nothing to leak a visitor's
+  IP to. `swap` means text is readable immediately in the fallback.
+*/
+@font-face {
+  font-family: 'Nunito Variable';
+  src: url('/fonts/nunito-latin-variable.woff2') format('woff2-variations');
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Scouting blue, plus a lighter step for large fills. */
+  --navy: #14477d;
+  --navy-dark: #0e3560;
+  --navy-soft: #2d6ba8;
+
+  /* Warm accents. The gold is the friendly one and does most of the lifting. */
+  --gold: #e8a33d;
+  /* Darkened from #b9761c so the section icons clear 4.5:1 on --gold-wash,
+     comfortably above the 3:1 that non-text graphics actually require. */
+  --gold-deep: #965f13;
+  --gold-wash: #fdf1dc;
+  /* Only for gold text on navy: #e8a33d there measures 4.37, just under the
+     4.5 that bold 14px needs. This is 5.47. */
+  --gold-on-navy: #f2bc6a;
+
+  /* Outdoors green, for the sections that talk about camping and meeting up. */
+  --green: #2f5a49;
+  --green-soft: #eaf2ed;
+
+  --ink: #1d2630;
+  --ink-soft: #4d5a68;
+  --line: #e6dfd2;
+
+  /* Cream rather than white. The single biggest change in how this reads. */
+  --surface: #fffdf8;
+  --surface-alt: #fbf4e8;
+  --surface-card: #ffffff;
+
+  /* Placeholders stay impossible to miss, now tuned to the warmer ground. */
+  --todo-bg: #fff2cc;
+  --todo-ink: #6b4500;
+  --todo-line: #d99b00;
+
+  --measure: 34rem;
+  --gutter: 1.25rem;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(29, 38, 48, 0.05), 0 6px 18px rgba(29, 38, 48, 0.06);
+
+  --font: 'Nunito Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--surface);
+}
+
+/* --- Skip link ---------------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--navy);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* --- Layout ------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: 62rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+main {
+  display: block;
+  padding-block: 2rem 3.5rem;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+/* --- Header ------------------------------------------------------------- */
+
+.site-header {
+  background: var(--navy);
+  color: #fff;
+  border-bottom: 4px solid var(--gold);
+}
+
+.site-header a {
+  color: #fff;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-block: 1rem;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 1.25rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.brand span {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  opacity: 0.85;
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.125rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.375rem 0;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  border-bottom-color: #fff;
+}
+
+.site-nav a[aria-current='page'] {
+  font-weight: 700;
+  border-bottom-color: var(--accent);
+}
+
+/* --- Typography --------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  color: var(--navy-dark);
+  margin-block: 2rem 0.5rem;
+  text-wrap: balance;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  margin-top: 0;
+}
+h2 {
+  font-size: clamp(1.3rem, 3.5vw, 1.625rem);
+}
+h3 {
+  font-size: 1.125rem;
+}
+
+p,
+ul,
+ol,
+dl {
+  margin-block: 0 1rem;
+}
+
+a {
+  color: var(--navy);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--navy-dark);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lede {
+  font-size: 1.1875rem;
+  color: var(--ink-soft);
+}
+
+/* --- Call to action ----------------------------------------------------- */
+
+.cta {
+  display: inline-block;
+  background: var(--gold);
+  color: #3a2708;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.0625rem;
+  padding: 0.875rem 1.625rem;
+  border-radius: 999px;
+  margin-block: 0.5rem 1rem;
+  box-shadow: var(--shadow);
+  /* 44px minimum touch target. */
+  min-height: 44px;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background: #f2b65a;
+  color: #3a2708;
+  transform: translateY(-1px);
+}
+
+.cta-secondary {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+  box-shadow: none;
+}
+
+.cta-secondary:hover,
+.cta-secondary:focus-visible {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* --- Hero --------------------------------------------------------------- */
+
+.hero {
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line);
+  padding-block: 2.5rem;
+}
+
+/* --- Cards and lists ---------------------------------------------------- */
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.375rem 1.5rem;
+  background: var(--surface-card);
+  box-shadow: var(--shadow);
+  margin-block-end: 1.25rem;
+}
+
+.card h2,
+.card h3 {
+  margin-top: 0;
+}
+
+.stack > * + * {
+  margin-block-start: 1.5rem;
+}
+
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.link-list li:last-child {
+  border-bottom: 0;
+}
+
+/* Whole row is the target: easier to hit with a thumb. */
+.link-list a {
+  display: block;
+  padding: 0.875rem 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-list a:hover,
+.link-list a:focus-visible {
+  text-decoration: underline;
+}
+
+.link-list p {
+  margin: 0 0 0.875rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.meta {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+dl.facts {
+  margin: 0;
+}
+
+dl.facts dt {
+  font-weight: 700;
+  color: var(--navy-dark);
+  margin-block-start: 1rem;
+}
+
+dl.facts dd {
+  margin: 0.25rem 0 0;
+}
+
+/* --- Placeholder -------------------------------------------------------- */
+
+/*
+  Unfilled content is loud on purpose. If this ships to a real domain, the
+  person looking at it should feel wrong immediately.
+*/
+.todo {
+  display: inline-block;
+  background: var(--todo-bg);
+  color: var(--todo-ink);
+  border: 1px dashed var(--todo-line);
+  border-radius: 4px;
+  padding: 0.125rem 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  font-weight: 600;
+}
+
+.todo-banner {
+  background: var(--todo-bg);
+  border-block: 2px solid var(--todo-line);
+  color: var(--todo-ink);
+  padding-block: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* --- Footer ------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 4px solid var(--gold);
+  background: var(--navy);
+  color: #d6e3f2;
+  padding-block: 2rem 2.5rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.site-footer h2 {
+  font-size: 0.875rem;
+  margin-block: 0 0.625rem;
+  color: var(--gold-on-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+}
+
+.site-footer a {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 2px;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--gold-on-navy);
+  text-decoration-color: currentColor;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer li + li {
+  margin-block-start: 0.375rem;
+}
+
+.fine-print {
+  margin-block-start: 1.75rem;
+  padding-block-start: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.875rem;
+  color: #b9cbe0;
+}
+
+/* --- Wider screens ------------------------------------------------------ */
+
+@media (min-width: 46rem) {
+  .header-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .site-nav,
+  .cta {
+    display: none;
+  }
+}
+
+/* --- Tables ------------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 0 1.5rem;
+  font-size: 0.9375rem;
+}
+
+caption {
+  text-align: left;
+  padding-block-end: 0.5rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+thead th {
+  background: var(--surface-alt);
+  color: var(--navy-dark);
+}
+
+tbody th {
+  font-weight: 700;
+}
+
+/* --- Source link -------------------------------------------------------- */
+
+.repo-link {
+  margin-block-start: 1rem;
+  font-size: 0.875rem;
+}
+
+.repo-link a {
+  display: inline-flex;
+  /* Align the mark to the first line, not to the middle of wrapped text. */
+  align-items: flex-start;
+  gap: 0.5rem;
+  /* Keeps the tap target comfortable without stretching the footer. */
+  padding-block: 0.5rem;
+  text-decoration: none;
+}
+
+.repo-link a:hover span,
+.repo-link a:focus-visible span {
+  text-decoration: underline;
+}
+
+.gh-mark {
+  flex: none;
+  /* Nudge onto the cap height of the first line. */
+  margin-block-start: 0.1875rem;
+}
+
+/* --- Hero --------------------------------------------------------------- */
+
+/*
+  The hero is text on cream with the drawn scene anchored to the bottom, so
+  the illustration frames the content instead of competing with it. On a phone
+  the scene is short and wide; it grows on larger screens.
+*/
+.hero {
+  position: relative;
+  background: var(--surface-alt);
+  border-bottom: none;
+  padding-block: 2.25rem 0;
+  overflow: hidden;
+}
+
+.hero .wrap {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  margin-bottom: 0.625rem;
+}
+
+.hero-scene {
+  display: block;
+  width: 100%;
+  height: clamp(110px, 24vw, 200px);
+}
+
+.eyebrow {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3125rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.875rem;
+}
+
+/* --- Section icons ------------------------------------------------------ */
+
+/*
+  A small drawn mark beside a heading. Decorative and aria-hidden; the heading
+  text is the real label.
+*/
+.icon-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon-head .sec-icon {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  background: var(--gold-wash);
+  color: var(--gold-deep);
+}
+
+.icon-head h2,
+.icon-head h3 {
+  margin: 0;
+  /* Let the heading take the remaining width instead of wrapping early, and
+     drop balancing, which fights the flex sizing. */
+  flex: 1;
+  min-width: 0;
+  text-wrap: pretty;
+}
+
+/* --- Highlight band ----------------------------------------------------- */
+
+/* Breaks up a long page of white cards with one warm full-width stripe. */
+.band {
+  background: var(--green-soft);
+  border-block: 1px solid var(--line);
+  padding-block: 2rem;
+  margin-block: 2.5rem 0;
+}
+
+.band h2 {
+  margin-top: 0;
+}

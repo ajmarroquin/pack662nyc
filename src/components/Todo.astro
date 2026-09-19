@@ -1,0 +1,22 @@
+---
+/**
+ * Renders an unfilled placeholder loudly.
+ *
+ * Every unknown on this site is a literal `TODO:` string that is visible in
+ * the rendered page. A blank is invisible in review; a yellow dashed box is
+ * not. Pass the raw placeholder string straight through from src/data/site.ts
+ * or a content entry.
+ */
+interface Props {
+  value: string;
+  /** Renders as a block-level paragraph rather than inline. */
+  block?: boolean;
+}
+
+const { value, block = false } = Astro.props;
+const Tag = block ? 'p' : 'span';
+---
+
+<Tag class={block ? undefined : 'todo'}>
+  {block ? <span class="todo">{value}</span> : value}
+</Tag>

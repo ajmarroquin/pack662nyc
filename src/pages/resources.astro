@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Field from '../components/Field.astro';
+import Icon from '../components/Icon.astro';
+import { isTodo } from '../data/site';
+
+/**
+ * The page parents return to. Flat and scannable, no accordions: someone
+ * looking for the health form on a phone should find it without tapping
+ * anything open first.
+ */
+const entries = (await getCollection('links')).filter((e) => !e.data.draft);
+
+// Fixed order, so "Start here" is always first regardless of file names.
+const CATEGORY_ORDER = [
+  'Start here',
+  'Forms and paperwork',
+  'Scouting America',
+  'Gear and uniform',
+  'Camping and outdoors',
+] as const;
+
+/** A mark per section, so the page is scannable by shape as well as by text. */
+const CATEGORY_ICON = {
+  'Start here': 'star',
+  'Forms and paperwork': 'book',
+  'Scouting America': 'compass',
+  'Gear and uniform': 'pack',
+  'Camping and outdoors': 'tent',
+} as const;
+
+const grouped = CATEGORY_ORDER.map((category) => ({
+  category,
+  items: entries
+    .filter((e) => e.data.category === category)
+    .sort((a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title)),
+})).filter((group) => group.items.length > 0);
+---
+
+<BaseLayout
+  title="Resources"
+  description="Links parents of Cub Scout Pack 662 need: sign-in, forms, council information, uniform and camping."
+>
+  <div class="wrap stack">
+    <div class="prose">
+      <h1>Resources</h1>
+      <p class="lede">
+        The links parents need most, in one place. Bookmark this page.
+      </p>
+    </div>
+
+    {
+      grouped.map((group) => (
+        <section aria-labelledby={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
+          <div class="icon-head">
+            <Icon name={CATEGORY_ICON[group.category]} />
+            <h2 id={`cat-${group.category.replace(/\s+/g, '-').toLowerCase()}`}>
+              {group.category}
+            </h2>
+          </div>
+          <ul class="link-list">
+            {group.items.map((item) => (
+              <li>
+                {/*
+                  An unfilled link points at /contact rather than nowhere: a
+                  parent who taps it still reaches a person.
+                */}
+                <a
+                  href={isTodo(item.data.url) ? '/contact' : item.data.url}
+                  aria-describedby={`d-${item.id}`}
+                >
+                  {item.data.title}
+                </a>
+                <p id={`d-${item.id}`}>
+                  {isTodo(item.data.url) && (
+                    <>
+                      <Field value={item.data.url} />{' '}
+                    </>
+                  )}
+                  <Field value={item.data.description} />
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <div class="prose">
+      <p class="meta">
+        A link here that is broken or out of date is worth telling us about.
+        Email <a href="mailto:info@pack662nyc.com">info@pack662nyc.com</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
