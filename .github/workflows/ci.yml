@@ -27,6 +27,11 @@ jobs:
       - name: No roster or member data files
         run: node scripts/check-no-data-files.mjs
 
+      # RULE 4. The site is live, so an unfilled placeholder is no longer a
+      # reminder to the pack; it is a yellow TODO box in front of a parent.
+      - name: No unfilled placeholders
+        run: node scripts/check-no-placeholders.mjs
+
       - uses: actions/setup-node@v5
         with:
           node-version: '22'

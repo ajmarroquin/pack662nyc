@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "no-data-files": "node scripts/check-no-data-files.mjs",
-    "content:todo": "node scripts/generate-content-todo.mjs"
+    "no-placeholders": "node scripts/check-no-placeholders.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

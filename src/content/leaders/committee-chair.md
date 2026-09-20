@@ -1,5 +1,5 @@
 ---
 role: "Committee Chair"
-name: "Josh Sigal & Jigar Mehta "
+name: "Josh Sigal & Jigar Mehta"
 order: 30
 ---

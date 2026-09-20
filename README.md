@@ -90,7 +90,7 @@ Other scripts:
 |---|---|
 | `npm run check` | Astro and TypeScript diagnostics |
 | `npm run no-data-files` | Rule 1 check, the same one CI runs |
-| `npm run content:todo` | Regenerates `CONTENT-TODO.md` from the source |
+| `npm run no-placeholders` | Rule 4 check, the same one CI runs |
 
 Node 22.
 

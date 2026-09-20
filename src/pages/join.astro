@@ -9,7 +9,7 @@ import { site, isTodo } from '../data/site';
  * The numbers are placeholders on purpose: fees change annually and vary by
  * council, and a wrong figure on this page is the one a family remembers.
  */
-const beAScoutFilled = !isTodo(site.beAScoutUrl);
+const registrationReady = !isTodo(site.registrationUrl);
 ---
 
 <BaseLayout
@@ -100,20 +100,23 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
 
       <h2>Signing up</h2>
       <p>
-        Registration goes through Scouting America directly, on our BeAScout unit
-        page. This will take care of National & Council registration fees, then you will be officially registered with the pack. After that we will follow up with information on dues, uniforms, and the den your child will join.
+        Registration goes through Scouting America directly. This will take care of National & Council registration fees, then you will be officially registered with the pack. After that we will follow up with information on dues, uniforms, and the den your child will join.
       </p>
       {
-        beAScoutFilled ? (
+        registrationReady ? (
           <p>
-            <a class="cta cta-secondary" href={site.beAScoutUrl}>
-              Our BeAScout unit page
+            <a class="cta" href={site.registrationUrl}>
+              Register with Pack 662
             </a>
           </p>
         ) : (
-          <p><Field value={site.beAScoutUrl} block /></p>
+          <p><Field value={site.registrationUrl} block /></p>
         )
       }
+      <p class="meta">
+        Still deciding? Our <a href={site.beAScoutUrl}>BeAScout unit page</a> has a
+        Request More Information button, or just email us.
+      </p>
 
       <h2>What happens after you register</h2>
       </div>
@@ -123,7 +126,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
           We invoice you through Scoutbook once your child is registered.
         </li>
         <li>
-          <strong>Get a uniform.</strong> From the 
+          <strong>Get a uniform.</strong> From the{' '}
           <a href="/resources">Scout Shop</a>, or from our uniform exchange bins at a
           meeting, which is free and worth checking first.
         </li>
@@ -137,7 +140,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       <p>
         Your child joins the den for their grade, and that den leader will be in touch
         with the den's schedule. Any adult who plans to volunteer also takes Scouting
-        America's Youth Protection training, which is free, online, and takes under an
+        America's Safeguarding Youth training, which is free, online, and takes under an
         hour.
       </p>
 
