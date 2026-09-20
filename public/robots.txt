@@ -1,12 +1,6 @@
 # Cub Scout Pack 662 NYC
 
-# The site is not live at its real domain yet and the content is placeholder.
-# Indexing a page full of TODO strings is worse than not existing at all.
-#
-# REMOVE THE DISALLOW BELOW in the same change that points DNS at this site.
-# The matching <meta name="robots" content="noindex"> lives in
-# src/layouts/BaseLayout.astro and must be removed at the same time.
 User-agent: *
-Disallow: /
+Allow: /
 
 Sitemap: https://pack662nyc.com/sitemap-index.xml

@@ -72,9 +72,9 @@ const metaDescription = isTodo(description)
   ? 'Cub Scout Pack 662 in New York City. Site in progress.'
   : description;
 
-// Placeholders are still present sitewide; the banner is removed in the same
-// change that points DNS at this site.
-const contentIncomplete = true;
+// Flips back to true if placeholder content is ever reintroduced sitewide.
+// `npm run content:todo` reports zero, so there is nothing to warn about.
+const contentIncomplete = false;
 ---
 
 <!doctype html>
@@ -100,13 +100,6 @@ const contentIncomplete = true;
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary" />
-
-    <!--
-      No site is live at this address yet and the content is placeholder.
-      Indexing a page full of TODO strings would be worse than not existing.
-      REMOVE THIS TAG in the same change that points DNS at the site.
-    -->
-    <meta name="robots" content="noindex, nofollow" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
