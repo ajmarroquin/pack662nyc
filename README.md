@@ -143,16 +143,21 @@ the site is more finished than it is.
 
 ## Repository settings
 
-Set these in GitHub's web interface; they are not in version control.
+These live in GitHub's web interface, not in version control, so this table is
+what they are **meant** to be. For what they currently are, see the audit in
+[LAUNCH.md](LAUNCH.md); two of them do not match yet.
 
-| Setting | Value |
+| Setting | Intended |
 |---|---|
 | Default branch | `main`, only branch |
-| Secret scanning + push protection | **On** (Settings, Code security) |
+| Secret scanning + push protection | On (Settings, Code security) |
 | Wiki, Projects, Discussions | Off |
 | Merge style | Squash only |
 | Auto-delete head branches | On |
 | Actions token permissions | Read-only (Settings, Actions, General) |
+
+The workflow in `.github/workflows/ci.yml` also declares `contents: read` for
+itself, so CI is read-only whatever the repository default happens to be.
 
 The repository lives under the maintainer's personal account and transfers to a
 pack-owned organization later. Transfer preserves history, issues, and pull
