@@ -161,7 +161,8 @@ So nobody redoes it:
 - Twelve of fourteen FAQs answered; the other two were dropped as duplicates
 - Mobile Lighthouse 100 performance, 100 accessibility, 100 best practices on
   all eight indexed pages
-- Zero client JavaScript, 188 KB total, no third-party requests
+- Zero client JavaScript, 200 KB built, and the page fetches nothing from a
+  third party: the font is self-hosted and the illustration and icons are inline
 - The roster-data guard runs first in CI and is verified to fail the build on a
   force-added CSV
 - The leaders schema rejects any address that is not on `pack662nyc.com`
