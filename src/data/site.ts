@@ -31,7 +31,7 @@ export const site = {
     'We are a family pack of about seventy boys and girls, split into dens by grade to work on adventures and earn their rank badges! As a family pack, parent or guardian comes along rather than dropping off, allowing for growth of the whole family.',
 
   meeting: {
-    schedule: 'Most Thuursdays, 6:00 to 7:00 p.m., September through June.',
+    schedule: 'Most Thursdays, 6:00 to 7:00 p.m., September through June.',
     locationName: 'Brick Presbyterian Church, Watson Hall',
     streetAddress: '62 East 92nd Street',
     addressLocality: 'New York',

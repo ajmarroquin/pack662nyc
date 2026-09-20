@@ -14,8 +14,8 @@ The site disagrees with it in three places, and the site is right:
 
 ### Decide what to do about the handbook's leadership table
 
-The handbook sits at `src/content/links/akela-handbook.md` with `draft: true`,
-so it does not render. Its Current Leadership section is a table of twenty
+The handbook is not linked from the site at all; the entry that would have
+done it has been removed. Its Current Leadership section is a table of twenty
 volunteers' full names and personal email addresses. Fine in a document handed
 to families; publishing the link on an indexed page hands twenty mailboxes to
 scrapers, and it is not the pack's call to make for sixteen den leaders without
@@ -31,9 +31,9 @@ Worth a look each September.
 
 ### Leader bios
 
-The four people in `src/content/leaders/` have roles and names. The cards read
-fine without a bio, but two sentences each would be better: what they do for
-the pack and one human detail. No youth names.
+The three cards in `src/content/leaders/` have roles and names. They read fine
+without a bio, but two sentences each would be better: what they do for the
+pack and one human detail. No youth names.
 
 ### Everything under "When someone else joins"
 

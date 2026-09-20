@@ -3,14 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
 import HeroScene from '../components/HeroScene.astro';
 import Icon from '../components/Icon.astro';
-import { site, isTodo } from '../data/site';
+import { site } from '../data/site';
 
 /**
  * A parent arriving from a search should know in ten seconds whether this is
  * for them: who we are, when we meet, and one thing to do next.
  */
 const m = site.meeting;
-const joinHref = isTodo(site.beAScoutUrl) ? '/join' : site.beAScoutUrl;
 ---
 
 <BaseLayout

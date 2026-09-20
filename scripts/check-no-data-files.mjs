@@ -49,7 +49,7 @@ const ALLOWLIST = new Set([
   '.gitignore',
   'README.md',
   'CONTENT.md',
-  'LAUNCH.md',
+  'TO-DO.md',
   'CONTENT-TODO.md',
   'scripts/check-no-data-files.mjs',
   '.github/workflows/ci.yml',
