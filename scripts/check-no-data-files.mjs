@@ -50,7 +50,6 @@ const ALLOWLIST = new Set([
   'README.md',
   'CONTENT.md',
   'TO-DO.md',
-  'CONTENT-TODO.md',
   'scripts/check-no-data-files.mjs',
   '.github/workflows/ci.yml',
 ]);
