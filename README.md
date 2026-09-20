@@ -5,12 +5,12 @@ The public website for Cub Scout Pack 662, New York City.
 Astro, TypeScript, plain CSS, no client JavaScript, statically generated and
 deployed on Vercel.
 
-**Status: content is real; launch is pending five small things.** Every page
-except Resources is free of placeholders. The site is deliberately not indexed
-and DNS is not pointed at it yet.
+**Status: ready to launch.** Zero placeholders, and mobile Lighthouse scores
+100 on performance, accessibility, best practices and SEO across all eight
+indexed pages. The only step left is pointing DNS.
 
-**[LAUNCH.md](LAUNCH.md) is the list of what is left**, in the order to do it.
-Start there.
+See **[LAUNCH.md](LAUNCH.md)** for that, and for the short list of things worth
+doing once it is live.
 
 ---
 
@@ -124,30 +124,28 @@ editors are parents who will not read a stack trace.
 
 ## Going live
 
-**DNS is not pointed at this site yet, on purpose.** The domain currently
-redirects to the pack's BeAScout page, which is a working web presence. A live
-site with visible `TODO:` boxes is worse than that redirect, and a parent who
-lands on one forms an impression you do not get to redo.
+**The site is ready; only DNS is left.** See [LAUNCH.md](LAUNCH.md) for the
+Namecheap steps and the short list of things worth doing afterwards.
 
-See **[LAUNCH.md](LAUNCH.md)** for exactly what is left and the order to do it.
-The short version: three resource links to supply or drop, a test email to each
-role address, secret scanning to switch on, then the three launch switches come
-out in one commit, and DNS goes last.
+Until DNS resolves, the site lives at its Vercel URL. Every page emits a
+canonical link pointing at `https://pack662nyc.com`, so a crawler that finds
+the Vercel address is told where the real one is and does not index a
+duplicate.
 
 An unfilled field is never silently blank. It renders as a yellow `TODO:` box
 on the page, and `npm run content:todo` regenerates
 [CONTENT-TODO.md](CONTENT-TODO.md) from the source, so that file cannot claim
-the site is more finished than it is.
+the site is more finished than it is. It currently reports zero.
 
 ---
 
 ## Repository settings
 
-These live in GitHub's web interface, not in version control, so this table is
-what they are **meant** to be. For what they currently are, see the audit in
-[LAUNCH.md](LAUNCH.md); two of them do not match yet.
+These live in GitHub's web interface, not in version control. All of them are
+applied as of 20 September 2026; re-check after any transfer of the repository,
+because settings do not always survive one.
 
-| Setting | Intended |
+| Setting | Value |
 |---|---|
 | Default branch | `main`, only branch |
 | Secret scanning + push protection | On (Settings, Code security) |
