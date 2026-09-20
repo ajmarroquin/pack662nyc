@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
 import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
 
 /**
  * Generated from the `faqs` collection. Plain headings and paragraphs rather
@@ -41,7 +42,7 @@ const slug = (s: string) => s.replace(/\s+/g, '-').toLowerCase();
       <h1>Frequently asked questions</h1>
       <p class="lede">
         The things families ask before they join. If yours is not here, email{' '}
-        <a href="mailto:info@pack662nyc.com">info@pack662nyc.com</a> and we will
+        <a href={`mailto:${site.email.pack}`}>{site.email.pack}</a> and we will
         answer it and then add it.
       </p>
     </div>

@@ -7,15 +7,26 @@ import { z } from 'astro/zod';
 /**
  * RULE 3, enforced structurally rather than by review.
  *
- * Only role addresses on the pack domain may appear on this site. A personal
- * address in a leader entry fails the build, so it can never reach production
- * because somebody skimmed a pull request on a phone.
+ * Two things pass: the pack's shared mailbox, and any address on the pack
+ * domain. A volunteer's own address fails the build, so it can never reach
+ * production because somebody skimmed a pull request on a phone.
+ *
+ * The shared mailbox is what the pack uses today. Four people read it, so
+ * nothing waits on one person, and it is nobody's personal address, which is
+ * what rule 3 is actually protecting. The pack domain stays permitted because
+ * addresses there would come back the moment the domain has a mail provider
+ * again; it lost forwarding when its nameservers moved to Vercel.
+ *
+ * Adding a second shared mailbox here is fine. Adding someone's own is not,
+ * whatever the reason seems to be at the time.
  */
-const roleEmail = z
+const PACK_MAILBOX = 'cubscout662@gmail.com';
+
+const packEmail = z
   .string()
-  .regex(
-    /^[a-z0-9._-]+@pack662nyc\.com$/,
-    'Leader email must be a role address on pack662nyc.com (e.g. cubmaster@pack662nyc.com). Personal addresses are not permitted on this site.',
+  .refine(
+    (v) => v === PACK_MAILBOX || /^[a-z0-9._-]+@pack662nyc\.com$/.test(v),
+    `Leader email must be the pack's shared mailbox (${PACK_MAILBOX}) or an address on pack662nyc.com. A volunteer's own address must not be published on this site.`,
   );
 
 /**
@@ -28,7 +39,7 @@ const leaders = defineCollection({
   schema: z.object({
     role: z.string().min(1),
     name: z.string().min(1),
-    email: roleEmail.optional(),
+    email: packEmail.optional(),
     bio: z.string().optional(),
     order: z.number().int().default(99),
     draft: z.boolean().default(false),

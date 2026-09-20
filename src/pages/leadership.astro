@@ -2,14 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
+import { site } from '../data/site';
 
 /**
  * Generated from the `leaders` collection.
  *
  * Leader entries carry no email at all, by the pack's choice: naming a person
  * beside an address implies that mail reaches them personally, and volunteers
- * change. The role addresses live on /contact instead. The schema still
- * constrains `email` to pack662nyc.com if one is ever added, so a personal
+ * change. The pack's shared mailbox lives on /contact instead. The schema
+ * still constrains `email` if one is ever added here, so a volunteer's own
  * address fails the build rather than reaching production.
  */
 const leaders = (await getCollection('leaders'))
@@ -29,9 +30,9 @@ const leaders = (await getCollection('leaders'))
         completed Scouting America's Youth Protection training and a background check.
       </p>
       <p class="meta">
-        We do not publish anyone&rsquo;s mailbox here. Reach any of them through the
-        role addresses on the <a href="/contact">contact page</a>, which keep working
-        when a role changes hands.
+        We do not publish anyone&rsquo;s own address here. Reach any of them through
+        the pack&rsquo;s shared mailbox on the <a href="/contact">contact page</a>,
+        which all four of them read.
       </p>
       <p class="meta">
         Den leaders are not listed. If your child joins, their den leader is in touch
@@ -60,7 +61,7 @@ const leaders = (await getCollection('leaders'))
         A pack runs on volunteers, and most of what is needed is small: driving,
         bringing something, running one activity. If you have an hour, we have
         something to do with it. Email{' '}
-        <a href="mailto:committeechair@pack662nyc.com">committeechair@pack662nyc.com</a>.
+        <a href={`mailto:${site.email.pack}`}>{site.email.pack}</a>.
       </p>
     </div>
   </div>

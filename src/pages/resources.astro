@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Field from '../components/Field.astro';
 import Icon from '../components/Icon.astro';
-import { isTodo } from '../data/site';
+import { site, isTodo } from '../data/site';
 
 /**
  * The page parents return to. Flat and scannable, no accordions: someone
@@ -90,7 +90,7 @@ const grouped = CATEGORY_ORDER.map((category) => ({
     <div class="prose">
       <p class="meta">
         A link here that is broken or out of date is worth telling us about.
-        Email <a href="mailto:info@pack662nyc.com">info@pack662nyc.com</a>.
+        Email <a href={`mailto:${site.email.pack}`}>{site.email.pack}</a>.
       </p>
     </div>
   </div>
