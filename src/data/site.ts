@@ -52,12 +52,17 @@ export const site = {
 
   /**
    * RULE 3: role addresses only, never a personal address, in content or in
-   * commits. These are forwards on the pack domain.
+   * commits.
    *
-   * NOT YET CONFIRMED LIVE. The pack's working contact address is currently a
-   * personal mailbox, which cannot go on this site: the content schema rejects
-   * it and rule 3 forbids it. Confirm these three forwards resolve before the
-   * site goes live, or a parent emails a dead address. See CONTENT-INTAKE.md.
+   * All three are configured as Namecheap forwards on the pack domain,
+   * pointing at the current role-holders' own mailboxes. That split is the
+   * whole point: the personal address does the work and never appears, and
+   * when a volunteer hands the role on, the forward changes and nothing here
+   * does.
+   *
+   * Configured is not the same as delivering. Send a test to each one before
+   * launch; a forward can be set up correctly and still be eaten by the
+   * destination's spam filter.
    */
   email: {
     info: 'info@pack662nyc.com',
