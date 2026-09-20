@@ -5,13 +5,7 @@ The public website for Cub Scout Pack 662, New York City.
 Astro, TypeScript, plain CSS, no client JavaScript, statically generated and
 deployed on Vercel.
 
-**Status: ready to launch.** Zero placeholders, and mobile Lighthouse scores
-100 on performance, accessibility, best practices and SEO across all eight
-indexed pages. The only step left is pointing DNS.
-
-See **[LAUNCH.md](LAUNCH.md)** for that, and for the short list of things worth
-doing once it is live.
-
+**Status: launched!**
 ---
 
 ## The four rules
@@ -128,23 +122,6 @@ Repeating things are markdown files in `src/content/`. Copy an existing file and
 edit the frontmatter. A malformed entry **fails the build** rather than
 rendering an empty block on the live site, which matters when the eventual
 editors are parents who will not read a stack trace.
-
----
-
-## Going live
-
-**The site is ready; only DNS is left.** See [LAUNCH.md](LAUNCH.md) for the
-Namecheap steps and the short list of things worth doing afterwards.
-
-Until DNS resolves, the site lives at its Vercel URL. Every page emits a
-canonical link pointing at `https://pack662nyc.com`, so a crawler that finds
-the Vercel address is told where the real one is and does not index a
-duplicate.
-
-An unfilled field is never silently blank. It renders as a yellow `TODO:` box
-on the page, and `npm run content:todo` regenerates
-[CONTENT-TODO.md](CONTENT-TODO.md) from the source, so that file cannot claim
-the site is more finished than it is. It currently reports zero.
 
 ---
 
