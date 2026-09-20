@@ -28,25 +28,27 @@ resolves, not before.
 
 ---
 
-## Watch this one
+## Changed under us
 
-### `committeechair@pack662nyc.com` has not been confirmed to deliver
+### The `@pack662nyc.com` addresses are gone
 
-`info@` and `cubmaster@` were both tested and arrive. The third was not, and
-the pack chose to launch anyway and fix it if it turns out to be broken. That
-is a reasonable call, and the failure mode is worth knowing: a forward that
-does not deliver fails silently, so nobody finds out until a family mentions
-they never heard back.
+Moving the domain's nameservers to Vercel ended Namecheap's email forwarding,
+because that forwarding rides on the MX records Namecheap serves and it no
+longer serves them. All three role addresses stopped existing at that moment.
 
-Two things already reduce the blast radius. Financial assistance is the worst
-message to lose, and every route to it on the site, the FAQ, the join page and
-now the contact page, sends it to a Cubmaster rather than the Committee Chair.
-And `/contact` offers BeAScout's Request More Information as a path that does
-not depend on the pack's own mail forwarding at all.
+The site now uses `cubscout662@gmail.com`, a shared mailbox that AJ, Naomi,
+Josh and Jigar all read. This is better than what it replaced, not a
+concession: four people see every message instead of one, so nothing waits on
+somebody being free, and the silent-forward-failure risk that was on this list
+is gone with the forwards.
 
-Test it when convenient. If it is broken, the fix is in Namecheap, not here.
+Every route into that inbox pre-fills a subject line, so one address can still
+be triaged at a glance.
 
----
+If addresses on the pack domain are ever wanted back, it needs a mail provider
+with MX records in Vercel's DNS, or the nameservers moved back to Namecheap
+with Vercel's A and CNAME records added there instead. Nothing about the site
+depends on that decision.
 
 ## Not blocking, worth doing
 
@@ -101,11 +103,12 @@ second person contributes; adding them now is overhead without benefit.
   self-hosted, the illustration and icons are inline SVG
 - Roster-data guard runs first in CI, verified to fail the build on a
   force-added CSV
-- Leaders schema rejects any address not on `pack662nyc.com`
+- Leaders schema rejects any address that is not the pack's shared mailbox
+  or on `pack662nyc.com`, verified in both directions
 - Secret scanning and push protection on, confirmed in the browser. The API
   does not expose this setting, so do not expect to check it programmatically
 - Repository settings all applied: `main` default, squash-only merges,
   auto-delete on, Wiki, Projects and Discussions off
-- Role address forwards configured, two of three confirmed delivering
+- All site contact goes to one shared mailbox that four leaders read
 - Friederike removed from the BeAScout listing
 - Production deploys green from `main` on every merge

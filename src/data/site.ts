@@ -51,23 +51,26 @@ export const site = {
   },
 
   /**
-   * RULE 3: role addresses only, never a personal address, in content or in
-   * commits.
+   * RULE 3: a pack address, never a volunteer's own.
    *
-   * All three are configured as Namecheap forwards on the pack domain,
-   * pointing at the current role-holders' own mailboxes. That split is the
-   * whole point: the personal address does the work and never appears, and
-   * when a volunteer hands the role on, the forward changes and nothing here
-   * does.
+   * This is a shared mailbox that AJ, Naomi, Josh and Jigar all read, so
+   * nothing waits on one person being free. It replaced three
+   * pack662nyc.com forwards, which stopped existing the moment the domain's
+   * nameservers moved to Vercel: Namecheap's email forwarding rides on the
+   * MX records it serves, and it no longer serves them.
    *
-   * Configured is not the same as delivering. Send a test to each one before
-   * launch; a forward can be set up correctly and still be eaten by the
-   * destination's spam filter.
+   * It still satisfies what rule 3 is actually for. It belongs to the pack
+   * rather than to a person, so no volunteer's mailbox is published for
+   * scrapers to harvest, and it keeps working when a role changes hands. The
+   * leaders schema enforces that: this address and the pack domain pass,
+   * anything else fails the build.
+   *
+   * If email on pack662nyc.com is ever wanted back, it needs a mail provider
+   * with MX records in Vercel's DNS, or the nameservers moved back to
+   * Namecheap with Vercel's A and CNAME records added there instead.
    */
   email: {
-    info: 'info@pack662nyc.com',
-    cubmaster: 'cubmaster@pack662nyc.com',
-    committeeChair: 'committeechair@pack662nyc.com',
+    pack: 'cubscout662@gmail.com',
   },
 
   /**

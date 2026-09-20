@@ -6,28 +6,42 @@ import { site, isTodo } from '../data/site';
 /**
  * A mailto:, deliberately, not a form. A form means a backend to run, spam to
  * filter, and messages that quietly go nowhere when a volunteer stops checking
- * an inbox. Mail to a role address lands somewhere a person already looks.
+ * an inbox. Mail to the pack's shared mailbox lands somewhere four people
+ * already look.
+ *
+ * One address rather than three, so the subject line does the sorting. Each
+ * link below pre-fills one, which costs the sender nothing and gives whoever
+ * opens the inbox something to triage on.
  *
  * This site stores nothing and never will. Anything that takes a submission
  * belongs in the separate member tool, not in this public repository.
  */
 const m = site.meeting;
 
-const contacts = [
+/** Pre-fills the subject so a shared inbox can be sorted at a glance. */
+const mailto = (subject: string) =>
+  `mailto:${site.email.pack}?subject=${encodeURIComponent(subject)}`;
+
+const reasons = [
   {
-    address: site.email.info,
-    who: 'General questions',
-    when: 'Start here if you are not sure who to ask.',
+    who: 'Visiting or joining',
+    subject: 'Visiting a Pack 662 meeting',
+    when: 'Tell us your child\u2019s grade and we will say which meeting to come to and where to find the door.',
   },
   {
-    address: site.email.cubmaster,
-    who: 'Cubmaster',
-    when: 'Visiting a meeting, joining, the program itself, and anything about cost or financial assistance.',
+    who: 'Cost, dues or financial assistance',
+    subject: 'Pack 662 dues and cost',
+    when: 'Including if the cost is a problem for your family. That conversation is handled quietly.',
   },
   {
-    address: site.email.committeeChair,
-    who: 'Committee Chair',
-    when: 'Volunteering, dues and pack administration.',
+    who: 'Volunteering',
+    subject: 'Volunteering with Pack 662',
+    when: 'Most of what is needed is small: driving, bringing something, running one activity.',
+  },
+  {
+    who: 'Anything else',
+    subject: 'Pack 662',
+    when: 'If none of the above fits, this is the one to use.',
   },
 ];
 ---
@@ -40,26 +54,36 @@ const contacts = [
     <div class="prose">
       <h1>Contact</h1>
       <p class="lede">
-        Email is the fastest way to reach us. These go to whoever currently holds
-        the role, so they keep working as volunteers change.
+        One address, read by four of us, so nothing waits on any one person
+        being free.
+      </p>
+      <p>
+        <a class="cta" href={mailto('Pack 662')}>{site.email.pack}</a>
+      </p>
+      <p class="meta">
+        Pick the closest match below and we will get it to the right person. It
+        goes to the Cubmasters, the Committee Chair and our Chartered
+        Organization Representative.
       </p>
     </div>
 
     {
-      contacts.map((c) => (
+      reasons.map((r) => (
         <section class="card">
-          <h2>{c.who}</h2>
-          <p><a href={`mailto:${c.address}`}>{c.address}</a></p>
-          <p class="meta">{c.when}</p>
+          <h2>{r.who}</h2>
+          <p class="meta">{r.when}</p>
+          <p>
+            <a href={mailto(r.subject)}>Email us about this</a>
+          </p>
         </section>
       ))
     }
 
     {
       /*
-        A second route that does not depend on our own mail forwarding. If the
-        pack662nyc.com addresses above are ever misconfigured, this one still
-        reaches the pack, because Scouting America runs it.
+        A second route that does not depend on the pack's own mailbox at all,
+        because Scouting America runs it. Worth keeping for the same reason a
+        building has two exits.
       */
       !isTodo(site.beAScoutUrl) && (
         <section class="card">
@@ -90,7 +114,7 @@ const contacts = [
 
     <div class="prose">
       <p class="meta">
-        We do not have a contact form. Mail goes to a person, not a database; this
+        We do not have a contact form. Mail goes to people, not a database; this
         site collects nothing and stores nothing about you.
       </p>
     </div>

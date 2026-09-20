@@ -41,14 +41,23 @@ Run it locally any time: `npm run no-data-files`
 
 GitHub setting, free on public repositories. See "Repository settings" below.
 
-### 3. Role email addresses only
+### 3. A pack address, never a volunteer's own
 
-`cubmaster@pack662nyc.com`, `committeechair@pack662nyc.com`,
-`info@pack662nyc.com`. Never a personal address, in content or in commit
-metadata.
+The pack uses one shared mailbox, `cubscout662@gmail.com`, which four leaders
+read. It is not anybody's personal address, so publishing it exposes no
+volunteer to scrapers, and it keeps working when a role changes hands. That is
+what this rule is for.
 
-This is enforced in the content schema (`src/content.config.ts`), not just in
-review: a leader entry with a personal address fails the build.
+Enforced in the content schema (`src/content.config.ts`), not just in review: a
+leader entry carrying someone's own address fails the build. The pack domain
+also passes, for whenever `pack662nyc.com` has mail again.
+
+It does not today. The three `@pack662nyc.com` forwards were Namecheap's, and
+Namecheap's email forwarding rides on the MX records it serves. Moving the
+domain's nameservers to Vercel stopped it serving them, so the forwards went
+with them. Getting those addresses back means a mail provider with MX records
+in Vercel's DNS, or moving the nameservers back to Namecheap and adding
+Vercel's A and CNAME records there instead.
 
 ### 4. No invented content
 
@@ -139,6 +148,97 @@ the site is more finished than it is. It currently reports zero.
 
 ---
 
+## Contributing
+
+Anyone in the pack can suggest a change. Most of what needs changing is text,
+and changing text does not require knowing anything about code.
+
+**Before anything else, read [the four rules](#the-four-rules).** Rule 1 is the
+one that matters most: nothing resembling a roster, a contact list, or a
+spreadsheet of families goes in this repository, ever, in any format. This
+repository is public and its history cannot be scrubbed.
+
+### Fixing a typo or updating text, without installing anything
+
+1. Find the page on the site and note what is wrong.
+2. In this repository, open the matching file:
+   - Meeting time, address, cost, council: `src/data/site.ts`
+   - A leader: `src/content/leaders/`
+   - An FAQ answer: `src/content/faqs/`
+   - A resource link: `src/content/links/`
+   - Page wording: `src/pages/`, one file per page
+3. Click the pencil icon to edit it in the browser.
+4. At the bottom, choose **Create a new branch for this commit and start a pull
+   request**, describe what you changed in a sentence, and submit.
+
+CI runs on the pull request. If it goes green, the change is safe to merge. If
+it goes red, open the failed check; the error says which file and what is wrong
+with it, in words rather than a stack trace.
+
+### Adding a leader, an FAQ, or a link
+
+Copy an existing file in the relevant folder, rename it, and edit the fields at
+the top. The fields are fixed and validated:
+
+- A leader's `email`, if you add one at all, **must** be the pack's shared
+  mailbox. A volunteer's own address fails the build. This is deliberate: a
+  shared mailbox keeps working when someone hands the job on, and a personal
+  address on a public site gets scraped. The leader cards currently carry no
+  addresses at all, which is the pack's preference.
+- An FAQ `category` must be one of Joining, Meetings, Cost, Uniform, Outdoors,
+  General.
+- A link `category` must be one of Start here, Forms and paperwork, Scouting
+  America, Gear and uniform, Camping and outdoors.
+- `order` controls position within a section. Lower is higher up. Leave gaps of
+  10 so things can be slotted in later without renumbering everything.
+
+A malformed entry fails the build rather than rendering an empty block on the
+live site. That is the point: a broken pull request is a minor annoyance, and a
+blank space on the join page is a family that did not join.
+
+### Working on it locally
+
+```bash
+git clone https://github.com/ajmarroquin/pack662nyc.git
+cd pack662nyc
+npm install
+npm run dev
+```
+
+Before opening a pull request:
+
+```bash
+npm run build           # must pass; CI runs exactly this
+npm run no-data-files   # rule 1 check
+```
+
+### What to put in a pull request
+
+One change per pull request where you can manage it, and a sentence saying what
+changed and why. "Fixed the meeting time, it moved to 6:45 in September" is a
+complete description. Screenshots help for anything visual.
+
+### What not to add
+
+No authentication, no roster data, no member-only content, and nothing that
+stores a submission. This site is static files and a `mailto:` link, and it
+stays that way. Anything needing a login or a database belongs in the separate
+member tool at its own subdomain.
+
+No photographs of youth, and no youth last names, in content or in captions.
+
+No analytics, trackers, or embedded third-party scripts without discussing it
+first. The site currently ships zero client JavaScript, which is why it loads
+instantly on a phone with one bar.
+
+### Who to ask
+
+Open an issue, or email
+[cubscout662@gmail.com](mailto:cubscout662@gmail.com). If you are not sure whether
+something belongs on the site, ask before writing it; that is faster for
+everyone than writing it and finding out in review.
+
+---
 ## Repository settings
 
 These live in GitHub's web interface, not in version control. All of them are
