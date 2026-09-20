@@ -1,5 +1,5 @@
 ---
-role: "Cubmaster"
-name: "AJ Marroquin"
+role: "Cubmasters"
+name: "AJ Marroquin & Naomi Lawrence "
 order: 10
 ---

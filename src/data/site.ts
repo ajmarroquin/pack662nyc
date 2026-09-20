@@ -28,26 +28,24 @@ export const site = {
 
   /** Two sentences. The first thing a parent reads. */
   intro:
-    'We are a family pack of about seventy Scouts, boys and girls, split into dens by grade. A parent or guardian comes along rather than dropping off, and that turns out to be the part most families like best.',
+    'We are a family pack of about seventy boys and girls, split into dens by grade to work on adventures and earn their rank badges! As a family pack, parent or guardian comes along rather than dropping off, allowing for growth of the whole family.',
 
   meeting: {
-    schedule: 'Every Thursday, 6:00 to 7:00 p.m., September through June.',
+    schedule: 'Most Thuursdays, 6:00 to 7:00 p.m., September through June.',
     locationName: 'Brick Presbyterian Church, Watson Hall',
-    // Confirmed by the pack against the Brick Church School map pin. The Akela
-    // Handbook says 66; the handbook is the one that is wrong.
     streetAddress: '62 East 92nd Street',
     addressLocality: 'New York',
     addressRegion: 'NY',
     postalCode: '10128',
     /** Entrance, buzzer, which door. Parents ask this first. */
     arrivalNotes:
-      'Use the East 92nd Street entrance, between Park and Madison. Reception will greet you and point you downstairs to Watson Hall. If it is your first visit, say so at the door and someone will walk you in.',
+      'Use the East 92nd Street entrance, between Park and Madison. Reception will greet you and point you downstairs to Watson Hall.',
     /** Where the pack goes when the weather is good. */
     outdoors:
-      'When the weather allows we meet outdoors, usually at the East Pinetum in Central Park, sometimes at the East Meadow.',
+      'When the weather allows we may meet outdoors, usually at the East Pinetum in Central Park, sometimes at the East Meadow.',
     /** How the pack actually reaches families about trips and one-off events. */
     communication:
-      'A pack WhatsApp group and one for your den, a weekly email from your den leader, a monthly email from pack leadership, and the calendar in Scoutbook. There is also an open committee meeting every month.',
+      'A pack WhatsApp community with chats for the whole pack and one for your den, a weekly email from your den leader, a monthly email from pack leadership, and the calendar in Scoutbook. There is also an open committee meeting every month.',
   },
 
   /**
@@ -103,12 +101,12 @@ export const site = {
   cost: {
     registration: '$145 a year',
     dues: '$120 a year',
-    activityFees: '$5 to $75 per event',
+    activityFees: 'Varies between $5 to $75 per event',
     /** Dues are prorated for families joining after September. */
     proration:
-      'Pack dues are prorated for anyone joining mid-year: you pay for the share of the year that is left, so joining in the middle means half.',
+      'Pack dues are prorated for anyone joining mid-year: you pay for the share of the year that is left!',
     assistance:
-      'Cost should never be the reason a child cannot join. Ask a Cubmaster and it is handled quietly. Families who can pay more than the dues are welcome to, and the difference sponsors another Scout.',
+      'Cost should never be the reason a child cannot join. If you need your dues payment split into multiple payments or full financial assistance, just email us and we can help! Families who can pay more than the dues are welcome to, and the difference supports sponsorship of other Scouts.',
   },
 
   council: {
