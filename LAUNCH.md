@@ -1,7 +1,7 @@
 # What is left before pack662nyc.com goes live
 
-Last reviewed 20 September 2026. Five things block launch, and none of them is
-large. Ordered by what to do first.
+Last reviewed 20 September 2026. **Four things block launch**, and none of them
+is large. Ordered by what to do first.
 
 Run `npm run content:todo` any time for the current placeholder count; that
 file is generated from the source and cannot go stale.
@@ -51,31 +51,9 @@ costs more than anything else on this list.
 
 ---
 
-## 3. Turn on secret scanning with push protection
+## 3. Flip the three launch switches
 
-**Whose: the pack. Two minutes. GitHub Settings, Code security.**
-
-This is rule 2 of the four, and it has never been confirmed on. The API does
-not expose the setting to this session, so it has to be checked in the browser.
-It is free on public repositories and there is no reason it is off.
-
-While you are on that screen, the rest of the settings table audits as:
-
-| Setting | State |
-| --- | --- |
-| Default branch `main` | correct |
-| Wiki, Projects, Discussions | off, correct |
-| Auto-delete head branches | on, correct |
-| Secret scanning + push protection | **unverified, check this** |
-| Merge style | squash, merge and rebase are all enabled; squash-only was the intent |
-
-The merge-style one is cosmetic. The secret scanning one is not.
-
----
-
-## 4. Flip the three launch switches
-
-**Whose: Claude, one commit. Do this last, after 1 to 3.**
+**Whose: Claude, one commit. Do this after 1 and 2.**
 
 Three things currently keep the site out of search results and tell visitors it
 is unfinished. They come out together, in one change, and only once the content
@@ -90,12 +68,12 @@ verified by serving the same build with the tag stripped, so it is not a guess.
 
 ---
 
-## 5. Point DNS, then update BeAScout
+## 4. Point DNS, then update BeAScout
 
 **Whose: the pack. This is the irreversible-feeling one, so it goes last.**
 
 Right now `pack662nyc.com` redirects to the BeAScout page, which is a working
-web presence. Do not replace that until 1 to 4 are done.
+web presence. Do not replace that until 1 to 3 are done.
 
 In Namecheap:
 
@@ -167,5 +145,10 @@ So nobody redoes it:
   force-added CSV
 - The leaders schema rejects any address that is not on `pack662nyc.com`
 - Role address forwards configured in Namecheap
+- Secret scanning and push protection on, which is rule 2 of the four
+- Repository settings all match intent: `main` default, squash-only merges,
+  auto-delete on, Wiki, Projects and Discussions off. The CI workflow also
+  declares `contents: read` for itself, so it is read-only whatever the
+  repository default is
 - Friederike removed from the BeAScout listing
 - Production deploys green from `main` on every merge

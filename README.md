@@ -131,8 +131,8 @@ lands on one forms an impression you do not get to redo.
 
 See **[LAUNCH.md](LAUNCH.md)** for exactly what is left and the order to do it.
 The short version: three resource links to supply or drop, a test email to each
-role address, secret scanning to switch on, then the three launch switches come
-out in one commit, and DNS goes last.
+role address, then the three launch switches come out in one commit, and DNS
+goes last.
 
 An unfilled field is never silently blank. It renders as a yellow `TODO:` box
 on the page, and `npm run content:todo` regenerates
@@ -143,11 +143,11 @@ the site is more finished than it is.
 
 ## Repository settings
 
-These live in GitHub's web interface, not in version control, so this table is
-what they are **meant** to be. For what they currently are, see the audit in
-[LAUNCH.md](LAUNCH.md); two of them do not match yet.
+These live in GitHub's web interface, not in version control. All of them are
+applied as of 20 September 2026; re-check after any transfer of the repository,
+because settings do not always survive one.
 
-| Setting | Intended |
+| Setting | Value |
 |---|---|
 | Default branch | `main`, only branch |
 | Secret scanning + push protection | On (Settings, Code security) |
