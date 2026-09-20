@@ -20,7 +20,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
     <div class="prose">
       <h1>Join Pack 662</h1>
       <p class="lede">
-        Visit first, decide after. Nobody signs anything at a first meeting.
+        You're welcome to visit our pack to see if scouting is a fit for your cub and family!
       </p>
 
       <div class="icon-head">
@@ -29,7 +29,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       </div>
       <p>
         Any child in kindergarten through fifth grade, and their family. You do not
-        need any Scouting background, camping experience, or gear.
+        need any Scouting background, or camping experience!
       </p>
 
       <div class="icon-head">
@@ -37,7 +37,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         <h2>What it costs</h2>
       </div>
       <p>
-        Two charges, going to two different places. Only the dues are ours.
+        There are two main charges: the national and council registration fee, and the pack dues. Uniforms and books are separate.
       </p>
       <dl class="facts">
         <dt>Scouting America registration</dt>
@@ -89,10 +89,8 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
         <h2>Visit before you commit</h2>
       </div>
       <p>
-        Come to a meeting and see whether your child likes it. Email{' '}
-        <a href={`mailto:${site.email.pack}`}>{site.email.pack}</a> with your
-        child's grade and we will tell you which meeting to come to and where to find
-        the door.
+        Come to a meeting and see whether your child likes it. Click below to email us, include your
+        child's name & grade and we will tell you which meeting to come to and what den you're in!
       </p>
       <p>
         <a class="cta" href={`mailto:${site.email.pack}?subject=${encodeURIComponent('Visiting a Pack 662 meeting')}`}>
@@ -103,8 +101,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       <h2>Signing up</h2>
       <p>
         Registration goes through Scouting America directly, on our BeAScout unit
-        page. That is the formal path, and it is the one that actually registers
-        your child.
+        page. This will take care of National & Council registration fees, then you will be officially registered with the pack. After that we will follow up with information on dues, uniforms, and the den your child will join.
       </p>
       {
         beAScoutFilled ? (
@@ -122,20 +119,11 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
       </div>
       <ol>
         <li>
-          <strong>Register with Scouting America.</strong> {site.cost.registration},
-          covering national and council, renewing on the date you joined.
-          {
-            !isTodo(site.registrationUrl) && (
-              <> <a href={site.registrationUrl}>Start the registration</a>.</>
-            )
-          }
-        </li>
-        <li>
           <strong>Pay pack dues.</strong> {site.cost.dues}, running from September.
           We invoice you through Scoutbook once your child is registered.
         </li>
         <li>
-          <strong>Get a uniform.</strong> From the
+          <strong>Get a uniform.</strong> From the 
           <a href="/resources">Scout Shop</a>, or from our uniform exchange bins at a
           meeting, which is free and worth checking first.
         </li>
@@ -155,7 +143,7 @@ const beAScoutFilled = !isTodo(site.beAScoutUrl);
 
       <div class="prose">
       <p>
-        Questions before any of that: <a href={`mailto:${site.email.pack}`}>{site.email.pack}</a>.
+        Contact us if you have questions: <a href={`mailto:${site.email.pack}`}>{site.email.pack}</a>.
       </p>
     </div>
   </div>
