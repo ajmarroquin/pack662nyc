@@ -32,6 +32,26 @@ export const site = {
 
   meeting: {
     schedule: 'Most Thursdays, 6:00 to 7:00 p.m., September through June.',
+    /**
+     * The same schedule in a form a machine can read, for the structured data
+     * in BaseLayout. Keep it in step with `schedule` above, which is the one
+     * humans see.
+     *
+     * This exists because Google's AI Overview was telling parents the pack
+     * meets on Wednesdays, sourced from the council's site. Our own markup had
+     * the address but only ever said "Thursday" inside a prose sentence, which
+     * is the weakest signal there is. This states it outright.
+     *
+     * `every` is deliberate where the prose says "most": a weekly recurrence
+     * is the closest schema.org can get, and a machine reading "most" would
+     * get nothing at all. The prose stays accurate for people.
+     */
+    structured: {
+      day: 'Thursday',
+      startTime: '18:00',
+      endTime: '19:00',
+      timezone: 'America/New_York',
+    },
     locationName: 'Brick Presbyterian Church, Watson Hall',
     streetAddress: '62 East 92nd Street',
     addressLocality: 'New York',
