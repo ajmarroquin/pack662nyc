@@ -76,6 +76,7 @@ const links = defineCollection({
       'Scouting America',
       'Gear and uniform',
       'Camping and outdoors',
+      'After Cub Scouts',
     ]),
     order: z.number().int().default(99),
     draft: z.boolean().default(false),

@@ -19,6 +19,7 @@ const CATEGORY_ORDER = [
   'Scouting America',
   'Gear and uniform',
   'Camping and outdoors',
+  'After Cub Scouts',
 ] as const;
 
 /** A mark per section, so the page is scannable by shape as well as by text. */
@@ -28,6 +29,7 @@ const CATEGORY_ICON = {
   'Scouting America': 'compass',
   'Gear and uniform': 'pack',
   'Camping and outdoors': 'tent',
+  'After Cub Scouts': 'compass',
 } as const;
 
 const grouped = CATEGORY_ORDER.map((category) => ({

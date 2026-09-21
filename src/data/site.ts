@@ -138,6 +138,30 @@ export const site = {
   },
 
   /**
+   * The Scouts BSA troops our Arrow of Light Scouts cross over into, chartered
+   * by the same church. Two units because Scouts BSA troops are single-gender.
+   *
+   * These are here rather than inline so a parent who lands on the wrong unit's
+   * site can be pointed at the right one from any page, and so a domain change
+   * is one edit.
+   *
+   * NOTE: the pack gave troop662nyc.com; Google and DuckDuckGo both index
+   * troop662nyc.org. Using the indexed one. Worth a click to confirm.
+   */
+  partnerTroops: [
+    {
+      name: 'Troop 662',
+      forWhom: 'boys',
+      url: 'https://troop662nyc.org',
+    },
+    {
+      name: 'Troop 662G',
+      forWhom: 'girls',
+      url: 'https://www.troop662girlsnyc.com',
+    },
+  ],
+
+  /**
    * This site's source. Public on purpose: a parent who wants to fix a typo
    * should be able to see exactly what the site is and propose the change.
    */

@@ -41,7 +41,14 @@ const ranks = [
       </p>
       <p>
         Cub Scouting is open to boys and girls. Children who finish the program move
-        on to Scouts BSA, the program for middle and high school age.
+        on to Scouts BSA, the program for middle and high school age. Ours cross over
+        to troops chartered by the same church:{' '}
+        {site.partnerTroops.map((t, i) => (
+          <>
+            {i > 0 && ' and '}
+            <a href={t.url}>{t.name}</a> for {t.forWhom}
+          </>
+        ))}.
       </p>
 
       <h2>What is a den and a pack?</h2>

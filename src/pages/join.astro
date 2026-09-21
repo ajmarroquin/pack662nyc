@@ -31,6 +31,16 @@ const registrationReady = !isTodo(site.registrationUrl);
         Any child in kindergarten through fifth grade, and their family. You do not
         need any Scouting background, or camping experience!
       </p>
+      <p class="meta">
+        Older than that? Scouts cross over to a troop around halfway through fifth
+        grade. Ours are chartered by the same church:{' '}
+        {site.partnerTroops.map((t, i) => (
+          <>
+            {i > 0 && ' and '}
+            <a href={t.url}>{t.name}</a> for {t.forWhom}
+          </>
+        ))}.
+      </p>
 
       <div class="icon-head">
         <Icon name="star" />
