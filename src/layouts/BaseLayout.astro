@@ -34,10 +34,29 @@ const nav = [
 const m = site.meeting;
 
 /**
- * Organization markup with a postal address. "cub scouts near me" is the real
- * acquisition channel for a pack, and local structured data is the cheapest
- * lever on it. Address fields that are still placeholders are dropped rather
- * than emitted, so search engines never ingest the string "TODO:".
+ * Structured data: the pack, and the meeting as a recurring event.
+ *
+ * "cub scouts near me" is the real acquisition channel for a pack, and local
+ * markup is the cheapest lever on it. Address fields that are still
+ * placeholders are dropped rather than emitted, so search engines never
+ * ingest the string "TODO:".
+ *
+ * The meeting is modelled as an Event with a Schedule rather than as opening
+ * hours on a Place. Opening hours would be a claim about when Brick
+ * Presbyterian Church is open, which is not ours to make and is not what we
+ * mean. A Schedule says exactly the true thing: this event recurs weekly, on
+ * Thursday, from 18:00 to 19:00, at that address.
+ *
+ * Schedule also lets us express a recurrence without inventing dates, which
+ * matters: dated events on a page like this go stale and start contradicting
+ * Scoutbook, and Scoutbook is the version that counts.
+ *
+ * Trade-off worth knowing: Google's Event rich result wants a startDate, and
+ * this has none by design. Google may therefore ignore it for rich results
+ * while still reading it to understand the entity, and Search Console may
+ * report it as an incomplete Event. That is an acceptable price for saying
+ * the meeting day in a machine-readable way; if the warning is noisy, drop
+ * the Event node and the Organization below still stands on its own.
  */
 const address = Object.fromEntries(
   Object.entries({
@@ -50,9 +69,11 @@ const address = Object.fromEntries(
   }).filter(([, v]) => typeof v === 'string' && !isTodo(v)),
 );
 
-const jsonLd: Record<string, unknown> = {
-  '@context': 'https://schema.org',
+const hasAddress = Boolean(address.streetAddress && address.addressLocality);
+
+const organization: Record<string, unknown> = {
   '@type': 'Organization',
+  '@id': `${site.url}#organization`,
   name: 'Cub Scout Pack 662',
   alternateName: 'Pack 662 NYC',
   url: site.url,
@@ -60,13 +81,41 @@ const jsonLd: Record<string, unknown> = {
   areaServed: 'New York, NY',
 };
 
-// Only include the address once it has at least a street and a locality.
-if (address.streetAddress && address.addressLocality) {
-  jsonLd.address = address;
+if (hasAddress) {
+  organization.address = address;
 }
 if (!isTodo(site.tagline)) {
-  jsonLd.description = site.tagline;
+  organization.description = site.tagline;
 }
+
+const graph: Record<string, unknown>[] = [organization];
+
+// The Event needs somewhere to happen, so it only goes out with an address.
+if (hasAddress && !isTodo(m.locationName)) {
+  graph.push({
+    '@type': 'Event',
+    '@id': `${site.url}#meeting`,
+    name: 'Cub Scout Pack 662 weekly meeting',
+    description: site.meeting.schedule,
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    organizer: { '@id': `${site.url}#organization` },
+    location: {
+      '@type': 'Place',
+      name: m.locationName,
+      address,
+    },
+    eventSchedule: {
+      '@type': 'Schedule',
+      repeatFrequency: 'P1W',
+      byDay: `https://schema.org/${m.structured.day}`,
+      startTime: m.structured.startTime,
+      endTime: m.structured.endTime,
+      scheduleTimezone: m.structured.timezone,
+    },
+  });
+}
+
+const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
 
 const metaDescription = isTodo(description)
   ? 'Cub Scout Pack 662 in New York City. Site in progress.'
