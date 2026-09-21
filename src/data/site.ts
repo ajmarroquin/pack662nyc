@@ -155,14 +155,19 @@ export const site = {
     {
       name: 'Troop 662',
       forWhom: 'boys',
+      label: 'Troop 662 (Boys)',
       url: 'https://troop662nyc.org',
     },
     {
       name: 'Troop 662G',
       forWhom: 'girls',
+      label: 'Troop 662G (Girls)',
       url: 'https://www.troop662girlsnyc.com',
     },
   ],
+
+  /** Both troops keep the same night as the pack, an hour later. */
+  troopMeeting: 'Thursday evenings, 7:00 to 8:15 p.m.',
 
   /**
    * This site's source. Public on purpose: a parent who wants to fix a typo
