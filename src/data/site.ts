@@ -37,6 +37,16 @@ export const site = {
     addressLocality: 'New York',
     addressRegion: 'NY',
     postalCode: '10128',
+    /**
+     * The neighborhood in words, which a postal address does not give you.
+     *
+     * A parent searching for a pack types a neighborhood, not a zip code, and
+     * until this line existed the words "Upper East Side" appeared exactly
+     * once on the whole site and "Carnegie Hill" not at all. Both are true of
+     * 62 East 92nd Street; this is the page that answers "where", so this is
+     * where they belong.
+     */
+    neighborhood: 'Carnegie Hill, on the Upper East Side',
     /** Entrance, buzzer, which door. Parents ask this first. */
     arrivalNotes:
       'Use the East 92nd Street entrance, between Park and Madison. Reception will greet you and point you downstairs to Watson Hall.',
@@ -77,6 +87,13 @@ export const site = {
    * without publishing anybody's mailbox.
    */
   beAScoutUrl: 'https://beascout.scouting.org/units/659bd3c6-4f85-4100-a932-d24527070149',
+
+  /**
+   * The pack's link hub. Not a door into the site so much as another place
+   * the pack already exists under its own name, which is what makes it
+   * useful as a `sameAs` in the structured data.
+   */
+  linktreeUrl: 'https://linktr.ee/pack662nyc',
 
   /**
    * The registration door. Confirmed by the pack as the link to send someone
@@ -128,8 +145,9 @@ export const site = {
    * site can be pointed at the right one from any page, and so a domain change
    * is one edit.
    *
-   * NOTE: the pack gave troop662nyc.com; Google and DuckDuckGo both index
-   * troop662nyc.org. Using the indexed one. Worth a click to confirm.
+   * The boys' troop is .org and the girls' troop is .com. That mismatch
+   * looks like a typo and is not; both were confirmed by the pack against
+   * the live sites. Do not "fix" one to match the other.
    */
   partnerTroops: [
     {

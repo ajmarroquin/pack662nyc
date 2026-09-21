@@ -71,6 +71,21 @@ const address = Object.fromEntries(
 
 const hasAddress = Boolean(address.streetAddress && address.addressLocality);
 
+/**
+ * `sameAs` is how you tell a search engine that two pages are the same
+ * organization rather than two organizations with a similar name.
+ *
+ * The pack's BeAScout unit page sits on scouting.org, a domain with far more
+ * standing than a month-old volunteer site will have for years. Declaring
+ * them the same entity is the cheapest way to borrow some of it, and unlike
+ * most things filed under SEO it is simply a true statement.
+ *
+ * Anything listed must be a profile of *this pack*, not a page that merely
+ * mentions it, or the claim is false and worth less than nothing. That is
+ * why the two partner troops are not here: they are neighbours, not us.
+ */
+const sameAs = [site.beAScoutUrl, site.linktreeUrl];
+
 const organization: Record<string, unknown> = {
   '@type': 'Organization',
   '@id': `${site.url}#organization`,
@@ -79,6 +94,7 @@ const organization: Record<string, unknown> = {
   url: site.url,
   email: site.email.pack,
   areaServed: 'New York, NY',
+  sameAs,
 };
 
 if (hasAddress) {

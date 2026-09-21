@@ -14,7 +14,7 @@ const m = site.meeting;
 
 <BaseLayout
   title="Meetings"
-  description="When and where Cub Scout Pack 662 meets in New York City, and what to expect on a first visit."
+  description="When and where Cub Scout Pack 662 meets on the Upper East Side, and what to expect on a first visit."
 >
   <div class="wrap stack">
     <div class="prose">
@@ -39,6 +39,9 @@ const m = site.meeting;
           <Field value={m.streetAddress} /><br />
           <Field value={m.addressLocality} />, {m.addressRegion} <Field value={m.postalCode} />
         </dd>
+
+        <dt>Neighborhood</dt>
+        <dd><Field value={m.neighborhood} /></dd>
 
         <dt>Finding the entrance</dt>
         <dd><Field value={m.arrivalNotes} /></dd>
