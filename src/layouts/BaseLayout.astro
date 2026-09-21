@@ -80,11 +80,11 @@ const hasAddress = Boolean(address.streetAddress && address.addressLocality);
  * them the same entity is the cheapest way to borrow some of it, and unlike
  * most things filed under SEO it is simply a true statement.
  *
- * Add the pack's Linktree here too once somebody supplies the URL. Anything
- * listed must be a profile of *this pack*, not a page that merely mentions
- * it, or the claim is false and worth less than nothing.
+ * Anything listed must be a profile of *this pack*, not a page that merely
+ * mentions it, or the claim is false and worth less than nothing. That is
+ * why the two partner troops are not here: they are neighbours, not us.
  */
-const sameAs = [site.beAScoutUrl];
+const sameAs = [site.beAScoutUrl, site.linktreeUrl];
 
 const organization: Record<string, unknown> = {
   '@type': 'Organization',

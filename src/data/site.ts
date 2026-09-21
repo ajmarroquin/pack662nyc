@@ -89,6 +89,13 @@ export const site = {
   beAScoutUrl: 'https://beascout.scouting.org/units/659bd3c6-4f85-4100-a932-d24527070149',
 
   /**
+   * The pack's link hub. Not a door into the site so much as another place
+   * the pack already exists under its own name, which is what makes it
+   * useful as a `sameAs` in the structured data.
+   */
+  linktreeUrl: 'https://linktr.ee/pack662nyc',
+
+  /**
    * The registration door. Confirmed by the pack as the link to send someone
    * who has decided to join, which settles an earlier ambiguity between two
    * my.scouting.org URLs that were both in circulation.
@@ -138,8 +145,9 @@ export const site = {
    * site can be pointed at the right one from any page, and so a domain change
    * is one edit.
    *
-   * NOTE: the pack gave troop662nyc.com; Google and DuckDuckGo both index
-   * troop662nyc.org. Using the indexed one. Worth a click to confirm.
+   * The boys' troop is .org and the girls' troop is .com. That mismatch
+   * looks like a typo and is not; both were confirmed by the pack against
+   * the live sites. Do not "fix" one to match the other.
    */
   partnerTroops: [
     {
