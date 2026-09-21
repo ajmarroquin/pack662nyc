@@ -51,6 +51,22 @@ const faqs = defineCollection({
   schema: z.object({
     question: z.string().min(1),
     answer: z.string().min(1),
+    /**
+     * Links rendered under the answer. Answers are plain text on purpose, so
+     * that nobody can put markup in a content file, but some answers are only
+     * useful if the reader can act on them without hunting for the page.
+     */
+    links: z
+      .array(
+        z.object({
+          label: z.string().min(1),
+          url: z.string().refine(
+            (v) => /^(https?:\/\/\S+|\/\S*)$/.test(v),
+            'FAQ link url must be an absolute http(s) URL or a site-relative path.',
+          ),
+        }),
+      )
+      .optional(),
     category: z.enum(['Joining', 'Meetings', 'Cost', 'Uniform', 'Outdoors', 'General']).default('General'),
     order: z.number().int().default(99),
     draft: z.boolean().default(false),

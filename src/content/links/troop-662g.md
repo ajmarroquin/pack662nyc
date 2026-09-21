@@ -1,7 +1,7 @@
 ---
 title: "Troop 662G, for girls"
 url: "https://www.troop662girlsnyc.com"
-description: "Where our girls go after Arrow of Light. Our linked girls troop on the Upper East Side."
+description: "A Scouts BSA troop for girls, hosted by the same church. Many of our Arrow of Light Scouts cross over here."
 category: "After Cub Scouts"
 order: 20
 ---

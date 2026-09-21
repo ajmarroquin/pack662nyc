@@ -138,8 +138,11 @@ export const site = {
   },
 
   /**
-   * The Scouts BSA troops our Arrow of Light Scouts cross over into, chartered
-   * by the same church. Two units because Scouts BSA troops are single-gender.
+   * The Scouts BSA troops most of our Arrow of Light Scouts cross over into.
+   * Two units because Scouts BSA troops are single-gender.
+   *
+   * Hosted by the same church, not chartered by it. Brick stopped chartering
+   * the pack; the pack is chartered to the council now. Say hosted.
    *
    * These are here rather than inline so a parent who lands on the wrong unit's
    * site can be pointed at the right one from any page, and so a domain change

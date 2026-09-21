@@ -64,6 +64,16 @@ const slug = (s: string) => s.replace(/\s+/g, '-').toLowerCase();
             <div>
               <h3>{item.data.question}</h3>
               <p><Field value={item.data.answer} /></p>
+              {item.data.links && (
+                <p>
+                  {item.data.links.map((l, i) => (
+                    <>
+                      {i > 0 && ' · '}
+                      <a href={l.url}>{l.label}</a>
+                    </>
+                  ))}
+                </p>
+              )}
             </div>
           ))}
         </section>
