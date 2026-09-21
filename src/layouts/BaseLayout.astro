@@ -34,29 +34,29 @@ const nav = [
 const m = site.meeting;
 
 /**
- * Structured data: the pack, and the meeting as a recurring event.
+ * Structured data for the pack.
  *
  * "cub scouts near me" is the real acquisition channel for a pack, and local
  * markup is the cheapest lever on it. Address fields that are still
  * placeholders are dropped rather than emitted, so search engines never
  * ingest the string "TODO:".
  *
- * The meeting is modelled as an Event with a Schedule rather than as opening
- * hours on a Place. Opening hours would be a claim about when Brick
- * Presbyterian Church is open, which is not ours to make and is not what we
- * mean. A Schedule says exactly the true thing: this event recurs weekly, on
- * Thursday, from 18:00 to 19:00, at that address.
+ * There was briefly an Event node here carrying the meeting as a weekly
+ * Schedule, added because Google's AI Overview was telling parents the pack
+ * meets on Wednesdays. It has been removed, and the reasoning is worth
+ * keeping so nobody re-adds it expecting a different outcome.
  *
- * Schedule also lets us express a recurrence without inventing dates, which
- * matters: dated events on a page like this go stale and start contradicting
- * Scoutbook, and Scoutbook is the version that counts.
+ * Google's Event rich result requires a startDate. A recurring meeting has no
+ * meaningful one, and inventing a season-start date would put a value on this
+ * site that somebody has to remember to change every September, on a site run
+ * by volunteers. Without it, Search Console reports a standing error, and a
+ * permanent error is worse than noise: it teaches whoever looks next to
+ * ignore the report, and it hides the next real problem behind it.
  *
- * Trade-off worth knowing: Google's Event rich result wants a startDate, and
- * this has none by design. Google may therefore ignore it for rich results
- * while still reading it to understand the entity, and Search Console may
- * report it as an incomplete Event. That is an acceptable price for saying
- * the meeting day in a machine-readable way; if the warning is noisy, drop
- * the Event node and the Organization below still stands on its own.
+ * The Event was also not what fixed the Wednesday claim. The correct meeting
+ * time reached Google's snippet through the page copy and the meta
+ * description. The Organization node below is valid, does its job, and is
+ * enough.
  */
 const address = Object.fromEntries(
   Object.entries({
@@ -88,34 +88,7 @@ if (!isTodo(site.tagline)) {
   organization.description = site.tagline;
 }
 
-const graph: Record<string, unknown>[] = [organization];
-
-// The Event needs somewhere to happen, so it only goes out with an address.
-if (hasAddress && !isTodo(m.locationName)) {
-  graph.push({
-    '@type': 'Event',
-    '@id': `${site.url}#meeting`,
-    name: 'Cub Scout Pack 662 weekly meeting',
-    description: site.meeting.schedule,
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    organizer: { '@id': `${site.url}#organization` },
-    location: {
-      '@type': 'Place',
-      name: m.locationName,
-      address,
-    },
-    eventSchedule: {
-      '@type': 'Schedule',
-      repeatFrequency: 'P1W',
-      byDay: `https://schema.org/${m.structured.day}`,
-      startTime: m.structured.startTime,
-      endTime: m.structured.endTime,
-      scheduleTimezone: m.structured.timezone,
-    },
-  });
-}
-
-const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
+const jsonLd = { '@context': 'https://schema.org', ...organization };
 
 const metaDescription = isTodo(description)
   ? 'Cub Scout Pack 662 in New York City. Site in progress.'
