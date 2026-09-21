@@ -37,6 +37,16 @@ export const site = {
     addressLocality: 'New York',
     addressRegion: 'NY',
     postalCode: '10128',
+    /**
+     * The neighborhood in words, which a postal address does not give you.
+     *
+     * A parent searching for a pack types a neighborhood, not a zip code, and
+     * until this line existed the words "Upper East Side" appeared exactly
+     * once on the whole site and "Carnegie Hill" not at all. Both are true of
+     * 62 East 92nd Street; this is the page that answers "where", so this is
+     * where they belong.
+     */
+    neighborhood: 'Carnegie Hill, on the Upper East Side',
     /** Entrance, buzzer, which door. Parents ask this first. */
     arrivalNotes:
       'Use the East 92nd Street entrance, between Park and Madison. Reception will greet you and point you downstairs to Watson Hall.',
