@@ -1,5 +1,5 @@
 ---
 role: "Council Unit Representative"
-name: "Josh Sigal"
+name: "Robert Dugan"
 order: 40
 ---
